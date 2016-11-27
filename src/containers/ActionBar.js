@@ -11,7 +11,8 @@ import {
 import './ActionBar.css';
 
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
-import FlatButton from 'material-ui/FlatButton';
+import TravelAction from '../components/TravelAction.js';
+
 
 class ActionBar extends Component {
     static propTypes = {
@@ -20,21 +21,14 @@ class ActionBar extends Component {
     };
 
     render() {
+        let travelAction = null;
+        if(this.props.canTravelTo)
+            travelAction = <TravelAction locations={this.props.canTravelTo} />
+            
         return (
             <Toolbar className="Toolbar">
                 <ToolbarGroup firstChild={true}>
-                    <FlatButton
-                        label="Add"
-                        onTouchTap={() => this.props.addMessage("hi")}
-                    />
-                    <FlatButton
-                        label="First Room"
-                        onTouchTap={() => this.props.fetchLocation("firstRoom")}
-                    />
-                    <FlatButton
-                        label="Delay"
-                        onTouchTap={this.props.setDelay}
-                    />
+                    {travelAction}
                 </ToolbarGroup>
             </Toolbar>
         );
@@ -42,7 +36,9 @@ class ActionBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+        canTravelTo: state.get('game').get('currentLocation').get('canTravelTo')
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {

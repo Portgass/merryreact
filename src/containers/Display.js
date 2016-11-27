@@ -31,7 +31,13 @@ class Display extends Component {
                                 arr.push(<br />);
                             })
                             return (
-                                <Typist key={index}>
+                                <Typist
+                                    key={index}
+                                    avgTypingDelay={10}
+                                    stdTypingDelay={0}
+                                    cursor={{ hideWhenDone: true,
+                                            hideWhenDoneDelay: 500 }}
+                                >
                                     {arr}
                                 </Typist>
                             )

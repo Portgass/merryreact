@@ -23,7 +23,7 @@ export function setDelay() {
 // Reducer
 export const defaultState = Map({
     messages: List(['Hello!']),
-    delay: 1000
+    delay: 500
 });
 
 export default function(state = defaultState, action) {

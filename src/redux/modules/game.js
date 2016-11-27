@@ -4,6 +4,7 @@ import { Map, List } from 'immutable';
 
 const INIT_LOCATIONS = 'game/INIT_LOCATIONS';
 export const FETCH_LOCATION = 'game/FETCH_LOCATION';
+export const CHANGE_LOCATION = 'game/CHANGE_LOCATION';
 const SET_LOCATION = 'game/SET_LOCATION';
 
 // Action Creators
@@ -14,6 +15,10 @@ export function initLocations(locations) {
 
 export function fetchLocation(id) {
     return { meta: { fetch: true }, type: FETCH_LOCATION, id };
+}
+
+export function changeLocation(id) {
+    return { meta: { fetch: true }, type: CHANGE_LOCATION, id };
 }
 
 export function setLocation(location) {

@@ -17,6 +17,7 @@ injectTapEventPlugin();
 
 import { fromJS } from 'immutable';
 import locations from './data/locations.js';
+import { initLocations, fetchLocation } from './redux/modules/game.js';
 
 const initialState = Map({});
 
@@ -28,10 +29,9 @@ const enhancer = compose(
 
 let store = createStore(reducer, initialState, enhancer);
 
-store.dispatch({
-    type: 'game/INIT_LOCATIONS',
-    locations: fromJS(locations)
-});
+store.dispatch(initLocations(fromJS(locations)));
+
+store.dispatch(fetchLocation('firstRoom'));
 
 ReactDOM.render(
     <Provider store={store}>
