@@ -1,42 +1,56 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { List } from 'immutable';
+
 import Typist from 'react-typist';
+import { Card, CardText } from 'material-ui/Card';
+
+import './Display.css';
 
 class Display extends Component {
     static propTypes = {
-        text: PropTypes.string.isRequired
+        messages: PropTypes.instanceOf(List).isRequired,
+        delay: PropTypes.number.isRequired
     };
 
     static defaultProps = {
-        text: 'Uninitialized text',
+        messages: List(['Uninitialized message']),
         delay: 10000
     };
 
     render() {
         return (
-            <div>
-                <Typist startDelay={ this.props.delay }>
-                    Hello I am here { this.props.text }
-                </Typist>
-
-            </div>
+            <Card className="Card">
+                <CardText className="CardText">
+                    {this.props.messages.map( (message, index) => {
+                        if(index > this.props.messages.size - 6){
+                            let arr = [];
+                            let lines = message.split('\n');
+                            lines.forEach(line => {
+                                arr.push(line);
+                                arr.push(<br />);
+                            })
+                            return (
+                                <Typist key={index}>
+                                    {arr}
+                                </Typist>
+                            )
+                        }
+                        return null
+                    })}
+                </CardText>
+            </Card>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        text: state.get('display').get('text'),
+        messages: state.get('display').get('messages'),
         delay: state.get('display').get('delay')
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {};
-};
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(Display);

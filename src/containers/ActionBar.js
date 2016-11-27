@@ -1,24 +1,42 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setText, setDelay } from '../redux/modules/display.js';
+import {
+    addMessage,
+    setDelay
+} from '../redux/modules/display.js';
+import {
+    fetchLocation
+} from '../redux/modules/game.js';
+import './ActionBar.css';
+
+import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
+import FlatButton from 'material-ui/FlatButton';
 
 class ActionBar extends Component {
     static propTypes = {
-        setText: PropTypes.func.isRequired,
+        addMessage: PropTypes.func.isRequired,
         setDelay: PropTypes.func.isRequired
     };
 
     render() {
         return (
-            <div>
-                <button onClick={() => this.props.setText("hi")}>
-                    Here
-                </button>
-                <button onClick={this.props.setDelay}>
-                    Here
-                </button>
-            </div>
+            <Toolbar className="Toolbar">
+                <ToolbarGroup firstChild={true}>
+                    <FlatButton
+                        label="Add"
+                        onTouchTap={() => this.props.addMessage("hi")}
+                    />
+                    <FlatButton
+                        label="First Room"
+                        onTouchTap={() => this.props.fetchLocation("firstRoom")}
+                    />
+                    <FlatButton
+                        label="Delay"
+                        onTouchTap={this.props.setDelay}
+                    />
+                </ToolbarGroup>
+            </Toolbar>
         );
     }
 }
@@ -29,7 +47,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        setText,
+        addMessage,
+        fetchLocation,
         setDelay
     }, dispatch);
 };
