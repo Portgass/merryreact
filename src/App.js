@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Display from './containers/Display.js';
+import ActionBar from './containers/ActionBar.js';
+import DevTools from './components/DevTools.js';
+
 class App extends Component {
   render() {
     return (
@@ -13,6 +17,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.jsx</code> and save to reload.
         </p>
+        <Display />
+        <ActionBar />
+        <DevTools />
       </div>
     );
   }
