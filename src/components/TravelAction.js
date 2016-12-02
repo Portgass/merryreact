@@ -50,7 +50,7 @@ class TravelAction extends Component {
                       onRequestClose={this.handleRequestClose}
                 >
                     <Menu>
-                        {this.props.locations.map((location, index) => {
+                        {this.props.locations.map(location => {
                             return (
                                 <MenuItem
                                     key={location}

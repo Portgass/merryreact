@@ -19,13 +19,12 @@ class Message extends Component {
     render() {
         const { props: { message, position } } = this
         return (
-            <Typist avgTypingDelay={10}
-                    stdTypingDelay={0}
-                    cursor={{   hideWhenDone: true,
-                            hideWhenDoneDelay: 500 }}
-            >
-                <div    className={this.getOpacity(position)}
-                        key={position}>
+            <div className={this.getOpacity(position)}>
+                <Typist avgTypingDelay={10}
+                        stdTypingDelay={0}
+                        cursor={{   hideWhenDone: true,
+                                    hideWhenDoneDelay: 500 }}
+                >
                     {message.split('\n').map((line, index) => {
                         return (
                             <span key={index}>
@@ -34,8 +33,8 @@ class Message extends Component {
                             </span>
                         )
                     })}
-                </div>
-            </Typist>
+                </Typist>
+            </div>
         );
     }
 }

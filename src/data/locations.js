@@ -9,5 +9,11 @@ can I fit in here.`,
     id: "secondRoom",
     introduction:
 `You went into the second room. There's a goblin sitting here.`,
-    canTravelTo: ["firstRoom"]
+    canTravelTo: ["firstRoom", "thirdRoom"]
+}, {
+    id: "thirdRoom",
+    introduction:
+`You stay in the middle of small dark room. be careful about what you can find
+in here.`,
+    canTravelTo: ["secondRoom"]
 }]

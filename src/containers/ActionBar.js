@@ -22,11 +22,13 @@ class ActionBar extends Component {
     };
 
     render() {
+        const { props: { canTravelTo, changeLocation } } = this;
+
         let travelAction = null;
         if(this.props.canTravelTo)
             travelAction = (
-                <TravelAction locations={this.props.canTravelTo}
-                              changeLocation={this.props.changeLocation}/>
+                <TravelAction locations={canTravelTo}
+                              changeLocation={changeLocation}/>
             )
 
         return (
