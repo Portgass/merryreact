@@ -6,7 +6,8 @@ import {
     setDelay
 } from '../redux/modules/display.js';
 import {
-    fetchLocation
+    fetchLocation,
+    changeLocation
 } from '../redux/modules/game.js';
 import './ActionBar.css';
 
@@ -23,8 +24,11 @@ class ActionBar extends Component {
     render() {
         let travelAction = null;
         if(this.props.canTravelTo)
-            travelAction = <TravelAction locations={this.props.canTravelTo} />
-            
+            travelAction = (
+                <TravelAction locations={this.props.canTravelTo}
+                              changeLocation={this.props.changeLocation}/>
+            )
+
         return (
             <Toolbar className="Toolbar">
                 <ToolbarGroup firstChild={true}>
@@ -45,6 +49,7 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         addMessage,
         fetchLocation,
+        changeLocation,
         setDelay
     }, dispatch);
 };

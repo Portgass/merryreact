@@ -30,6 +30,11 @@ class TravelAction extends Component {
         });
     };
 
+    handleSelectLocation = (location) => {
+        this.props.changeLocation(location);
+        this.setState({ open: false });
+    }
+
     render() {
         return (
             <span>
@@ -50,6 +55,7 @@ class TravelAction extends Component {
                                 <MenuItem
                                     key={location}
                                     primaryText={location}
+                                    onTouchTap={() => this.handleSelectLocation(location)}
                                 />
                             )
                         })}

@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { List } from 'immutable';
 
-import Typist from 'react-typist';
 import { Card, CardText } from 'material-ui/Card';
 
 import './Display.css';
+import Message from '../components/Message';
 
 class Display extends Component {
     static propTypes = {
@@ -23,23 +23,12 @@ class Display extends Component {
             <Card className="Card">
                 <CardText className="CardText">
                     {this.props.messages.map( (message, index) => {
-                        if(index > this.props.messages.size - 6){
-                            let arr = [];
-                            let lines = message.split('\n');
-                            lines.forEach(line => {
-                                arr.push(line);
-                                arr.push(<br />);
-                            })
+                        let length = this.props.messages.size;
+                        if(index > length - 4){
                             return (
-                                <Typist
-                                    key={index}
-                                    avgTypingDelay={10}
-                                    stdTypingDelay={0}
-                                    cursor={{ hideWhenDone: true,
-                                            hideWhenDoneDelay: 500 }}
-                                >
-                                    {arr}
-                                </Typist>
+                                <Message    key={index}
+                                            message={message}
+                                            position={length - index}/>
                             )
                         }
                         return null
