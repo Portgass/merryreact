@@ -11,7 +11,7 @@ import {
 } from '../redux/modules/game.js';
 import './ActionBar.css';
 
-import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
+import { Card, CardActions } from 'material-ui/Card';
 import TravelAction from '../components/TravelAction.js';
 
 
@@ -32,11 +32,11 @@ class ActionBar extends Component {
             )
 
         return (
-            <Toolbar className="Toolbar">
-                <ToolbarGroup firstChild={true}>
+            <Card className="ActionBar">
+                <CardActions>
                     {travelAction}
-                </ToolbarGroup>
-            </Toolbar>
+                </CardActions>
+            </Card>
         );
     }
 }
