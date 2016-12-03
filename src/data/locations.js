@@ -4,7 +4,11 @@ export default [{
 `Welcome to the first room. This is testing test, let's see, how much can I fit
 in here, Welcome to the first room. This is testing test, let's see, how much
 can I fit in here.`,
-    canTravelTo: ["secondRoom"]
+    canTravelTo: ["secondRoom"],
+    items: [{
+        id: "key",
+        name: "Mysterious key"
+    }]
 }, {
     id: "secondRoom",
     introduction:
@@ -15,5 +19,12 @@ can I fit in here.`,
     introduction:
 `You stay in the middle of small dark room. be careful about what you can find
 in here.`,
-    canTravelTo: ["secondRoom"]
+    canTravelTo: ["secondRoom"],
+    items: [{
+        id: "orb",
+        name: "Black orb"
+    }, {
+        id: "fish",
+        name: "Gold fish"
+    }]
 }]
