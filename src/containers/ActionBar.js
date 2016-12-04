@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
     changeLocation,
-    pickupItem
+    pickupItem,
+    investigate
 } from '../redux/modules/game.js';
 import './ActionBar.css';
 
 import { Card, CardActions } from 'material-ui/Card';
 import TravelAction from '../components/TravelAction.js';
 import PickupAction from '../components/PickupAction.js';
+import InvestigateAction from '../components/InvestigateAction.js';
 
 
 class ActionBar extends Component {
@@ -18,7 +20,14 @@ class ActionBar extends Component {
     };
 
     render() {
-        const { props: { canTravelTo, changeLocation, items, pickupItem } } = this;
+        const { props: {
+            canTravelTo,
+            changeLocation,
+            items,
+            pickupItem,
+            places,
+            investigate
+        } } = this;
 
         let travelAction = null;
         if(canTravelTo)
@@ -34,11 +43,19 @@ class ActionBar extends Component {
                               pickupItem={pickupItem}/>
             )
 
+        let investigateAction = null;
+        if(places)
+            investigateAction = (
+                <InvestigateAction  places={places}
+                                    investigate={investigate}/>
+            )
+
         return (
             <Card className="ActionBar">
                 <CardActions className="ActionBarActions">
                     {travelAction}
                     {pickupAction}
+                    {investigateAction}
                 </CardActions>
             </Card>
         );
@@ -48,14 +65,16 @@ class ActionBar extends Component {
 const mapStateToProps = (state) => {
     return {
         canTravelTo: state.getIn(['currentLocation', 'canTravelTo']),
-        items: state.getIn(['currentLocation', 'items'])
+        items: state.getIn(['currentLocation', 'items']),
+        places: state.getIn(['currentLocation', 'places'])
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         changeLocation,
-        pickupItem
+        pickupItem,
+        investigate
     }, dispatch);
 };
 

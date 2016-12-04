@@ -7,6 +7,8 @@ export const CHANGE_LOCATION = 'game/CHANGE_LOCATION';
 
 const PICKUP_ITEM = 'game/PICKUP_ITEM';
 
+const INVESTIGATE = 'game/INVESTIGATE';
+
 const ADD_MESSAGE = 'game/ADD_MESSAGE';
 
 
@@ -22,6 +24,10 @@ export function changeLocation(location) {
 
 export function pickupItem(item) {
     return { type: PICKUP_ITEM, item };
+}
+
+export function investigate(place) {
+    return { type: INVESTIGATE, place };
 }
 
 export function addMessage(text) {
@@ -53,14 +59,40 @@ export default function(state = defaultState, action) {
                 });
             });
             state = state.updateIn(['messages'], m => {
-                return m.push(location.get('introduction'))
+                return m.push(location.get('onEnter'))
             });
             return state.set('currentLocation', location);
         case PICKUP_ITEM:
             state = state.updateIn(['currentLocation', 'items'], items => {
                 return items.filter(i => i.get('id') !== action.item.get('id'))
             });
+            if(action.item.get('onPickup'))
+                state = state.updateIn(['messages'], m => {
+                    return m.push(action.item.get('onPickup'))
+                });
             return state.update('inventory', i => i.push(action.item));
+        case INVESTIGATE:
+            if(action.place.get('onInvestigate').has('unlockItem')) {
+                state = state.updateIn(['currentLocation', 'items'], items => {
+                    return items.push(action.place.getIn(['onInvestigate', 'unlockItem']))
+                });
+
+                state = state.updateIn(['currentLocation', 'places'], places => {
+                    return places.map(place => {
+                        if(place.get('id') === action.place.get('id')) {
+                            place = place.update('onInvestigate', on => {
+                                return on.delete('unlockItem')
+                            });
+                        }
+                        return place;
+                    });
+                });
+            }
+
+            return state.updateIn(['messages'], messages => {
+                return messages.push(action.place.getIn(['onInvestigate', 'message']))
+            });
+
         case ADD_MESSAGE:
             return state.updateIn(['messages'], m => m.push(action.text));
         default:
