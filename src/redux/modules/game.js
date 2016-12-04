@@ -38,7 +38,7 @@ export function addMessage(text) {
 export const defaultState = Map({
     inventory: List([]),
     currentLocation: Map({}),
-    messages: List(['Hello!']),
+    messages: List([]),
     locations: List([])
 });
 

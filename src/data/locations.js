@@ -29,8 +29,8 @@ can I fit in here.`,
         name: "Broken table",
         onInvestigate: {
             message:
-            `The table seems like it was pretty fancy, before some thing ate big chunk of
-            it. Someithing seems to be locked in its drawer.`
+`The table seems like it was pretty fancy, before some thing ate big chunk of
+it. Someithing seems to be locked in its drawer.`
         }
     }]
 }, {
