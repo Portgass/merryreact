@@ -3,3 +3,12 @@
     width: 1000px;
     background-color: rgb(238, 238, 238) !important;
 }
+
+.ActionBarActions {
+    display: flex;
+    flexWrap: wrap;
+}
+
+.ActionBarActions button {
+    margin-right: 8px !important;
+}

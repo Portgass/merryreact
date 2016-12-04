@@ -1,20 +1,37 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { List } from 'immutable';
+
+import Chip from 'material-ui/Chip';
+
+import './Inventory.css';
 
 class Inventory extends Component {
     static propTypes = {
+        inventory: PropTypes.instanceOf(List).isRequired
     };
 
     render() {
+        const { props: { inventory } } = this;
+
         return (
-            <div></div>
+            <div className="Inventory">
+                {inventory.map(item => {
+                    return (
+                        <Chip key={item.get('id')} className="InventoryItem">
+                            {item.get('name')}
+                        </Chip>
+                    )
+                })}
+            </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+        inventory: state.get('game').get('inventory')
+    };
 };
 const mapDispatchToProps = (dispatch) => {
     return {};

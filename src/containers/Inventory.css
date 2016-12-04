@@ -1,0 +1,10 @@
+.Inventory {
+    margin: 0 auto;
+    width: 1000px;
+    display: flex;
+    flexWrap: wrap;
+}
+
+.InventoryItem {
+    margin: 0 4px !important;
+}

@@ -40,7 +40,7 @@ class ActionBar extends Component {
 
         return (
             <Card className="ActionBar">
-                <CardActions>
+                <CardActions className="ActionBarActions">
                     {travelAction}
                     {pickupAction}
                 </CardActions>
