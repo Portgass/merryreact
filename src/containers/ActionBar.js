@@ -2,10 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-    addMessage
-} from '../redux/modules/display.js';
-import {
-    fetchLocation,
     changeLocation,
     pickupItem
 } from '../redux/modules/game.js';
@@ -18,7 +14,7 @@ import PickupAction from '../components/PickupAction.js';
 
 class ActionBar extends Component {
     static propTypes = {
-        addMessage: PropTypes.func.isRequired
+        changeLocation: PropTypes.func.isRequired
     };
 
     render() {
@@ -51,15 +47,13 @@ class ActionBar extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        canTravelTo: state.get('game').get('currentLocation').get('canTravelTo'),
-        items: state.get('game').get('currentLocation').get('items')
+        canTravelTo: state.getIn(['currentLocation', 'canTravelTo']),
+        items: state.getIn(['currentLocation', 'items'])
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        addMessage,
-        fetchLocation,
         changeLocation,
         pickupItem
     }, dispatch);

@@ -30,7 +30,7 @@ class Inventory extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        inventory: state.get('game').get('inventory')
+        inventory: state.get('inventory')
     };
 };
 const mapDispatchToProps = (dispatch) => {

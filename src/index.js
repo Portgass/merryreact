@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { Map } from 'immutable';
+import { createStore, compose } from 'redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import reducer from './redux/reducer';
-import fetch from './redux/middleware/fetch.js';
 import App from './App';
 import DevTools from './components/DevTools';
 import './index.css';
@@ -17,21 +15,18 @@ injectTapEventPlugin();
 
 import { fromJS } from 'immutable';
 import locations from './data/locations.js';
-import { initLocations, fetchLocation } from './redux/modules/game.js';
-
-const initialState = Map({});
+import { initLocations, changeLocation } from './redux/modules/game.js';
 
 const enhancer = compose(
-    applyMiddleware(fetch),
   // Required! Enable Redux DevTools with the monitors you chose
   DevTools.instrument()
 );
 
-let store = createStore(reducer, initialState, enhancer);
+let store = createStore(reducer, enhancer);
 
 store.dispatch(initLocations(fromJS(locations)));
 
-store.dispatch(fetchLocation('firstRoom'));
+store.dispatch(changeLocation('firstRoom'));
 
 ReactDOM.render(
     <Provider store={store}>

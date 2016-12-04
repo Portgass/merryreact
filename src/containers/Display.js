@@ -9,8 +9,7 @@ import Message from '../components/Message';
 
 class Display extends Component {
     static propTypes = {
-        messages: PropTypes.instanceOf(List).isRequired,
-        delay: PropTypes.number.isRequired
+        messages: PropTypes.instanceOf(List).isRequired
     };
 
     static defaultProps = {
@@ -41,8 +40,7 @@ class Display extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        messages: state.get('display').get('messages'),
-        delay: state.get('display').get('delay')
+        messages: state.get('messages')
     };
 };
 
