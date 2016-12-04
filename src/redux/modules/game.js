@@ -74,12 +74,20 @@ export default function(state = defaultState, action) {
         case INVESTIGATE:
             if(action.place.get('onInvestigate').has('unlockItem')) {
                 state = state.updateIn(['currentLocation', 'items'], items => {
-                    return items.push(action.place.getIn(['onInvestigate', 'unlockItem']))
+                    return items.push(action.place.getIn(['onInvestigate', 'unlockItem', 'item']))
                 });
 
                 state = state.updateIn(['currentLocation', 'places'], places => {
                     return places.map(place => {
                         if(place.get('id') === action.place.get('id')) {
+                            place = place.setIn(['onInvestigate', 'message'],
+                                action.place.getIn([
+                                    'onInvestigate',
+                                    'unlockItem',
+                                    'afterUnlockMessage'
+                                ])
+                            );
+
                             place = place.update('onInvestigate', on => {
                                 return on.delete('unlockItem')
                             });

@@ -16,9 +16,12 @@ can I fit in here.`,
         onInvestigate: {
             message: "Strange mud is dripping down from the ceiling.",
             unlockItem: {
-                id: "mudball",
-                name: "Ball of Mud",
-                onPickup: "This disgusting ball of mud won't be useful at all."
+                item: {
+                    id: "mudball",
+                    name: "Ball of Mud",
+                    onPickup: "This disgusting ball of mud won't be useful at all."
+                },
+                afterUnlockMessage: "You have plenty of this stupid mud."
             }
         }
     }, {
