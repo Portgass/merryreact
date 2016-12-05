@@ -9,7 +9,10 @@ can I fit in here.`,
     items: [{
         id: "key",
         name: "Mysterious key",
-        onPickup: "You picked up the mysteriously looking key."
+        onPickup: "You picked up the mysteriously looking key.",
+        interactions: [
+            "drawer"
+        ]
     }],
     places: [{
         id: "corner",
@@ -38,7 +41,20 @@ it. Someithing seems to be locked in its drawer.`
         name: "Locked drawer",
         onInvestigate: {
             message: "The drawer is locked, it seems like a place for old rustic key."
-        }
+        },
+        onInteraction: [{
+            item: "key",
+            message: "Unlocking the drawer.",
+            actions: [{
+                type: "spawnItem",
+                message: "Old lamp is laying there.",
+                item: {
+                    id: "lamp",
+                    name: "Old lamp",
+                    onPickup: "The lamp might work if you find a fuel."
+                },
+            }]
+        }]
     }]
 }, {
     id: "secondRoom",

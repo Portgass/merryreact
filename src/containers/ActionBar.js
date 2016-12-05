@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+import { List } from 'immutable';
+
 import {
     changeLocation,
     pickupItem,
@@ -9,7 +12,9 @@ import {
 import './ActionBar.css';
 
 import { Card, CardActions } from 'material-ui/Card';
+
 import Action from '../components/Action.js';
+import Interaction from '../components/Interaction.js';
 
 
 class ActionBar extends Component {
@@ -24,7 +29,8 @@ class ActionBar extends Component {
             items,
             pickupItem,
             places,
-            investigate
+            investigate,
+            inventory
         } } = this;
 
         let travelAction = null;
@@ -32,7 +38,7 @@ class ActionBar extends Component {
             travelAction = (
                 <Action name="Travel"
                         children={canTravelTo}
-                        action={changeLocation}/>
+                        action={changeLocation} />
             )
 
         let pickupAction = null;
@@ -40,7 +46,7 @@ class ActionBar extends Component {
             pickupAction = (
                 <Action name="Pickup"
                         children={items}
-                        action={pickupItem}/>
+                        action={pickupItem} />
             )
 
         let investigateAction = null;
@@ -48,8 +54,19 @@ class ActionBar extends Component {
             investigateAction = (
                 <Action name="Investigate"
                         children={places}
-                        action={investigate}/>
+                        action={investigate} />
             )
+
+        let useAction = null;
+        if(inventory && inventory.size) {
+            const interactables = List([ items, places ]).flatten(true);
+            useAction = (
+                <Interaction    name="Use"
+                                children={inventory}
+                                interactables={interactables}
+                                action={investigate} />
+            )
+        }
 
         return (
             <Card className="ActionBar">
@@ -57,6 +74,7 @@ class ActionBar extends Component {
                     {travelAction}
                     {pickupAction}
                     {investigateAction}
+                    {useAction}
                 </CardActions>
             </Card>
         );
@@ -71,7 +89,8 @@ const mapStateToProps = (state) => {
             });
         }),
         items: state.getIn(['currentLocation', 'items']),
-        places: state.getIn(['currentLocation', 'places'])
+        places: state.getIn(['currentLocation', 'places']),
+        inventory: state.get('inventory')
     };
 };
 
