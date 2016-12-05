@@ -1,13 +1,17 @@
 import React, { Component, PropTypes } from 'react';
+
 import { List } from 'immutable';
+
 import FlatButton from 'material-ui/FlatButton';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 
-class TravelAction extends Component {
+class Action extends Component {
     static propTypes = {
-        locations: PropTypes.instanceOf(List)
+        children: PropTypes.instanceOf(List).isRequired,
+        name: PropTypes.string.isRequired,
+        action: PropTypes.func.isRequired
     };
 
     state = {
@@ -30,8 +34,8 @@ class TravelAction extends Component {
         });
     };
 
-    handleAction = (child) => {
-        this.props.action(child);
+    handleAction = (item) => {
+        this.props.action(item);
         this.setState({ open: false });
     }
 
@@ -52,12 +56,12 @@ class TravelAction extends Component {
                       onRequestClose={this.handleRequestClose}
                 >
                     <Menu>
-                        {children.map(child => {
+                        {children.map(item => {
                             return (
                                 <MenuItem
-                                    key={child.get('id')}
-                                    primaryText={child.get('name')}
-                                    onTouchTap={() => this.handleAction(child)}
+                                    key={item.get('id')}
+                                    primaryText={item.get('name')}
+                                    onTouchTap={() => this.handleAction(item)}
                                 />
                             )
                         })}
@@ -68,4 +72,4 @@ class TravelAction extends Component {
     }
 }
 
-export default TravelAction;
+export default Action;

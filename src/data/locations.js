@@ -33,6 +33,12 @@ can I fit in here.`,
 `The table seems like it was pretty fancy, before some thing ate big chunk of
 it. Someithing seems to be locked in its drawer.`
         }
+    }, {
+        id: "drawer",
+        name: "Locked drawer",
+        onInvestigate: {
+            message: "The drawer is locked, it seems like a place for old rustic key."
+        }
     }]
 }, {
     id: "secondRoom",
