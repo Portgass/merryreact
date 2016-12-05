@@ -9,9 +9,8 @@ import {
 import './ActionBar.css';
 
 import { Card, CardActions } from 'material-ui/Card';
+import Action from '../components/Action.js';
 import TravelAction from '../components/TravelAction.js';
-import PickupAction from '../components/PickupAction.js';
-import InvestigateAction from '../components/InvestigateAction.js';
 
 
 class ActionBar extends Component {
@@ -39,15 +38,17 @@ class ActionBar extends Component {
         let pickupAction = null;
         if(items && items.size)
             pickupAction = (
-                <PickupAction items={items}
-                              pickupItem={pickupItem}/>
+                <Action name="Pickup"
+                        children={items}
+                        action={pickupItem}/>
             )
 
         let investigateAction = null;
         if(places)
             investigateAction = (
-                <InvestigateAction  places={places}
-                                    investigate={investigate}/>
+                <Action name="Investigate"
+                        children={places}
+                        action={investigate}/>
             )
 
         return (
