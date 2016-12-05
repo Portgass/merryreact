@@ -25,8 +25,7 @@ const enhancer = compose(
 let store = createStore(reducer, enhancer);
 
 store.dispatch(initLocations(fromJS(locations)));
-
-store.dispatch(changeLocation('firstRoom'));
+store.dispatch(changeLocation(fromJS(locations[0])));
 
 ReactDOM.render(
     <Provider store={store}>

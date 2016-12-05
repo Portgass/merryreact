@@ -10,7 +10,6 @@ import './ActionBar.css';
 
 import { Card, CardActions } from 'material-ui/Card';
 import Action from '../components/Action.js';
-import TravelAction from '../components/TravelAction.js';
 
 
 class ActionBar extends Component {
@@ -31,8 +30,9 @@ class ActionBar extends Component {
         let travelAction = null;
         if(canTravelTo)
             travelAction = (
-                <TravelAction locations={canTravelTo}
-                              changeLocation={changeLocation}/>
+                <Action name="Travel"
+                        children={canTravelTo}
+                        action={changeLocation}/>
             )
 
         let pickupAction = null;
@@ -65,7 +65,11 @@ class ActionBar extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        canTravelTo: state.getIn(['currentLocation', 'canTravelTo']),
+        canTravelTo: state.getIn(['currentLocation', 'canTravelTo']).map(location => {
+            return state.get('locations').find(l => {
+                return l.get('id') === location;
+            });
+        }),
         items: state.getIn(['currentLocation', 'items']),
         places: state.getIn(['currentLocation', 'places'])
     };

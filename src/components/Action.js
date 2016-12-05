@@ -30,7 +30,7 @@ class TravelAction extends Component {
         });
     };
 
-    handleSelectLocation = (child) => {
+    handleAction = (child) => {
         this.props.action(child);
         this.setState({ open: false });
     }

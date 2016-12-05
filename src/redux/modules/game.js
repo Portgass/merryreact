@@ -47,8 +47,8 @@ export default function(state = defaultState, action) {
         case INIT_LOCATIONS:
             return state.set('locations', action.locations);
         case CHANGE_LOCATION:
-            const location = state.get('locations').find(l => {
-                return l.get('id') === action.location
+            let location = state.get('locations').find(l => {
+                return l.get('id') === action.location.get('id')
             });
             state = state.update('locations', locations => {
                 return locations.map(l => {
