@@ -7,7 +7,8 @@ import { List } from 'immutable';
 import {
     changeLocation,
     pickupItem,
-    investigate
+    investigate,
+    interact
 } from '../redux/modules/game.js';
 import './ActionBar.css';
 
@@ -30,7 +31,8 @@ class ActionBar extends Component {
             pickupItem,
             places,
             investigate,
-            inventory
+            inventory,
+            interact
         } } = this;
 
         let travelAction = null;
@@ -64,7 +66,7 @@ class ActionBar extends Component {
                 <Interaction    name="Use"
                                 children={inventory}
                                 interactables={interactables}
-                                action={investigate} />
+                                action={interact} />
             )
         }
 
@@ -98,7 +100,8 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         changeLocation,
         pickupItem,
-        investigate
+        investigate,
+        interact
     }, dispatch);
 };
 

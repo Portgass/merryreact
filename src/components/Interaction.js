@@ -36,8 +36,8 @@ class Interaction extends Component {
         });
     };
 
-    handleAction = (item) => {
-        this.props.action(item);
+    handleAction = (item, interactable) => {
+        this.props.action(item, interactable);
         this.setState({ open: false });
     }
 
@@ -64,12 +64,15 @@ class Interaction extends Component {
                                     key={item.get('id')}
                                     primaryText={item.get('name')}
                                     rightIcon={<ArrowDropRight />}
-                                    menuItems={interactables.map(i => {
+                                    menuItems={interactables.map(interactable => {
                                         return (
                                             <MenuItem
-                                                key={i.get('id')}
-                                                primaryText={i.get('name')}
-                                                onTouchTap={() => this.handleAction(i)} />
+                                                key={interactable.get('id')}
+                                                primaryText={interactable.get('name')}
+                                                onTouchTap={() => {
+                                                    return this.handleAction(item, interactable)
+                                                }}
+                                            />
                                         )
                                     })}
                                 />

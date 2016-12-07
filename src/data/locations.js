@@ -35,7 +35,8 @@ can I fit in here.`,
             message:
 `The table seems like it was pretty fancy, before some thing ate big chunk of
 it. Someithing seems to be locked in its drawer.`
-        }
+        },
+        onInteraction: [{}]
     }, {
         id: "drawer",
         name: "Locked drawer",
@@ -45,14 +46,25 @@ it. Someithing seems to be locked in its drawer.`
         onInteraction: [{
             item: "key",
             message: "Unlocking the drawer.",
-            actions: [{
+            events: [{
                 type: "spawnItem",
                 message: "Old lamp is laying there.",
                 item: {
                     id: "lamp",
                     name: "Old lamp",
                     onPickup: "The lamp might work if you find a fuel."
-                },
+                }
+            }, {
+                type: "destroyItem",
+                item: {
+                    id: "key"
+                }
+            }, {
+                type: "updateMessage",
+                messageType: 'onInvestigate',
+                target: "drawer",
+                targetType: 'place',
+                targetMessage: "The drawer is unlocked."
             }]
         }]
     }]

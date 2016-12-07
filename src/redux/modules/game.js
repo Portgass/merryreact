@@ -9,6 +9,8 @@ const PICKUP_ITEM = 'game/PICKUP_ITEM';
 
 const INVESTIGATE = 'game/INVESTIGATE';
 
+const INTERACT = 'game/INTERACT';
+
 const ADD_MESSAGE = 'game/ADD_MESSAGE';
 
 
@@ -30,17 +32,75 @@ export function investigate(place) {
     return { type: INVESTIGATE, place };
 }
 
+export function interact(item, interactable) {
+    return { type: INTERACT, item, interactable };
+}
+
 export function addMessage(text) {
     return { type: ADD_MESSAGE, text };
 }
 
-// Reducer
+// Default state
 export const defaultState = Map({
     inventory: List([]),
     currentLocation: Map({}),
     messages: List([]),
     locations: List([])
 });
+
+// Helpers
+
+function sendMessage(state, message) {
+    return state.updateIn(['messages'], messages => {
+        return messages.push(message);
+    });
+}
+
+function spawnItem(state, item) {
+    return state.updateIn(['currentLocation', 'items'], items => {
+        return items.push(item);
+    });
+}
+
+function destroyItem(state, item) {
+    return state.update('inventory', items => {
+        return items.filter(i => i.get('id') !== item.get('id'));
+    });
+}
+
+function updateMessage(state, event) {
+    let messagePosition;
+    if(event.get('targetType') === 'place')
+        messagePosition = ['currentLocation', 'places'];
+
+    return state.updateIn(messagePosition, is => {
+        return is.map(i => {
+            if(i.get('id') === event.get('target'))
+                i = i.setIn([event.get('messageType'), 'message'], event.get('targetMessage'));
+
+            return i;
+        })
+    })
+}
+
+function manageEvents(state, events) {
+    events.forEach(event => {
+        const type = event.get('type');
+        if(event.has('message'))
+            state = sendMessage(state, event.get('message'));
+
+        if(type === 'spawnItem')
+            state = spawnItem(state, event.get('item'));
+        else if(type === 'destroyItem')
+            state = destroyItem(state, event.get('item'));
+        else if(type === 'updateMessage')
+            state = updateMessage(state, event);
+    });
+
+    return state;
+}
+
+// Reducer
 
 export default function(state = defaultState, action) {
     switch (action.type) {
@@ -58,24 +118,19 @@ export default function(state = defaultState, action) {
                         return l;
                 });
             });
-            state = state.updateIn(['messages'], m => {
-                return m.push(location.get('onEnter'))
-            });
+            state = sendMessage(state, location.get('onEnter'));
             return state.set('currentLocation', location);
         case PICKUP_ITEM:
             state = state.updateIn(['currentLocation', 'items'], items => {
                 return items.filter(i => i.get('id') !== action.item.get('id'))
             });
             if(action.item.get('onPickup'))
-                state = state.updateIn(['messages'], m => {
-                    return m.push(action.item.get('onPickup'))
-                });
+                state = sendMessage(state, action.item.get('onPickup'));
+
             return state.update('inventory', i => i.push(action.item));
         case INVESTIGATE:
             if(action.place.get('onInvestigate').has('unlockItem')) {
-                state = state.updateIn(['currentLocation', 'items'], items => {
-                    return items.push(action.place.getIn(['onInvestigate', 'unlockItem', 'item']))
-                });
+                state = spawnItem(state, action.place.getIn(['onInvestigate', 'unlockItem', 'item']));
 
                 state = state.updateIn(['currentLocation', 'places'], places => {
                     return places.map(place => {
@@ -96,13 +151,26 @@ export default function(state = defaultState, action) {
                     });
                 });
             }
+            return sendMessage(state, action.place.getIn(['onInvestigate', 'message']));
+        case INTERACT:
+            let message = "That's not on fire!";
+            const interactable = action.interactable;
 
-            return state.updateIn(['messages'], messages => {
-                return messages.push(action.place.getIn(['onInvestigate', 'message']))
-            });
+            if(interactable.has('onInteraction')) {
+                const interaction = interactable.get('onInteraction').find(i => {
+                    return i.get('item') === action.item.get('id');
+                });
 
+                if(interaction) {
+                    message = interaction.get('message');
+                    state = sendMessage(state, message);
+                    state = manageEvents(state, interaction.get('events'));
+                }
+            }
+
+            return state;
         case ADD_MESSAGE:
-            return state.updateIn(['messages'], m => m.push(action.text));
+            return sendMessage(state, action.text);
         default:
             return state;
     }
