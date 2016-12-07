@@ -44,6 +44,7 @@ class Interaction extends Component {
     render() {
         const { props: { name, children, interactables } } = this;
 
+        // FIXME error in third room, in interactable.get('id')
         return (
             <span>
                 <FlatButton

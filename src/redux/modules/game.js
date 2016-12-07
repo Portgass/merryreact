@@ -129,28 +129,9 @@ export default function(state = defaultState, action) {
 
             return state.update('inventory', i => i.push(action.item));
         case INVESTIGATE:
-            if(action.place.get('onInvestigate').has('unlockItem')) {
-                state = spawnItem(state, action.place.getIn(['onInvestigate', 'unlockItem', 'item']));
+            if(action.place.has('events'))
+                state = manageEvents(state, action.place.get('events'));
 
-                state = state.updateIn(['currentLocation', 'places'], places => {
-                    return places.map(place => {
-                        if(place.get('id') === action.place.get('id')) {
-                            place = place.setIn(['onInvestigate', 'message'],
-                                action.place.getIn([
-                                    'onInvestigate',
-                                    'unlockItem',
-                                    'afterUnlockMessage'
-                                ])
-                            );
-
-                            place = place.update('onInvestigate', on => {
-                                return on.delete('unlockItem')
-                            });
-                        }
-                        return place;
-                    });
-                });
-            }
             return sendMessage(state, action.place.getIn(['onInvestigate', 'message']));
         case INTERACT:
             let message = "That's not on fire!";
@@ -166,6 +147,8 @@ export default function(state = defaultState, action) {
                     state = sendMessage(state, message);
                     state = manageEvents(state, interaction.get('events'));
                 }
+            } else {
+                state = sendMessage(state, message);
             }
 
             return state;
