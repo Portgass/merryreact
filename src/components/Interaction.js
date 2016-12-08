@@ -60,14 +60,12 @@ class Interaction extends Component {
                 >
                     <Menu>
                         {children.map(item => {
-                            console.log(interactables);
                             return (
                                 <MenuItem
                                     key={item.get('id')}
                                     primaryText={item.get('name')}
                                     rightIcon={<ArrowDropRight />}
                                     menuItems={interactables.map(interactable => {
-                                        console.log(interactable);
                                         return (
                                             <MenuItem
                                                 key={interactable.get('id')}

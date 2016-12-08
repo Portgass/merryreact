@@ -129,8 +129,8 @@ export default function(state = defaultState, action) {
 
             return state.update('inventory', i => i.push(action.item));
         case INVESTIGATE:
-            if(action.place.has('events'))
-                state = manageEvents(state, action.place.get('events'));
+            if(action.place.get('onInvestigate').has('events'))
+                state = manageEvents(state, action.place.getIn(['onInvestigate', 'events']));
 
             return sendMessage(state, action.place.getIn(['onInvestigate', 'message']));
         case INTERACT:
