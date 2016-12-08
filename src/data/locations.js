@@ -1,5 +1,5 @@
 export default [{
-    id: "firstRoom",
+    id: "l:firstRoom",
     name: "First Room",
     onEnter:
 `Welcome to the first room. This is testing test, let's see, how much can I fit
@@ -7,7 +7,7 @@ in here, Welcome to the first room. This is testing test, let's see, how much
 can I fit in here.`,
     canTravelTo: ["secondRoom"],
     items: [{
-        id: "key",
+        id: "i:key",
         name: "Mysterious key",
         onPickup: "You picked up the mysteriously looking key.",
         interactions: [
@@ -15,26 +15,26 @@ can I fit in here.`,
         ]
     }],
     places: [{
-        id: "corner",
+        id: "p:corner",
         name: "Dark Corner",
         onInvestigate: {
             message: "Strange mud is dripping down from the ceiling.",
             events: [{
                 type: "spawnItem",
                 item: {
-                    id: "mudball",
+                    id: "i:mudball",
                     name: "Ball of Mud",
                     onPickup: "This disgusting ball of mud won't be useful at all."
                 }
             }, {
                 type: "destroyItem",
                 item: {
-                    id: "mudball"
+                    id: "i:mudball"
                 }
             }]
         }
     }, {
-        id: "table",
+        id: "p:table",
         name: "Broken table",
         onInvestigate: {
             message:
@@ -43,62 +43,62 @@ it. Someithing seems to be locked in its drawer.`
         },
         onInteraction: [{}]
     }, {
-        id: "drawer",
+        id: "p:drawer",
         name: "Locked drawer",
         onInvestigate: {
             message: "The drawer is locked, it seems like a place for old rustic key."
         },
         onInteraction: [{
-            item: "key",
+            item: "i:key",
             message: "Unlocking the drawer.",
             events: [{
                 type: "spawnItem",
                 message: "Old lamp is laying there.",
                 item: {
-                    id: "lamp",
+                    id: "i:lamp",
                     name: "Old lamp",
                     onPickup: "The lamp might work if you find a fuel."
                 }
             }, {
                 type: "destroyItem",
                 item: {
-                    id: "key"
+                    id: "i:key"
                 }
             }, {
                 type: "updateMessage",
                 messageType: 'onInvestigate',
-                target: "drawer",
+                target: "p:drawer",
                 targetType: 'place',
                 targetMessage: "The drawer is unlocked."
             }]
         }]
     }]
 }, {
-    id: "secondRoom",
+    id: "l:secondRoom",
     name: "Hallway",
     onEnter:
 `You went into the second room. There's a goblin sitting here.`,
-    canTravelTo: ["firstRoom", "thirdRoom"],
+    canTravelTo: ["l:firstRoom", "l:thirdRoom"],
     items: [],
     places: [{
-        id: "puddle",
+        id: "p:puddle",
         name: "Puddle of water",
         onInvestigate: {
             message: "There's nothing in this room, that could create this puddle."
         }
     }]
 }, {
-    id: "thirdRoom",
+    id: "l:thirdRoom",
     name: "Lockers",
     onEnter:
 `You stay in the middle of small dark room. be careful about what you can find
 in here.`,
-    canTravelTo: ["secondRoom"],
+    canTravelTo: ["l:secondRoom"],
     items: [{
-        id: "orb",
+        id: "i:orb",
         name: "Black orb"
     }, {
-        id: "fish",
+        id: "i:fish",
         name: "Gold fish"
     }]
 }]
