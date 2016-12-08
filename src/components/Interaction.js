@@ -42,13 +42,14 @@ class Interaction extends Component {
     }
 
     render() {
-        const { props: { name, children, interactables } } = this;
+        const { props: { name, icon, children, interactables } } = this;
 
         // FIXME error in third room, in interactable.get('id')
         return (
             <span>
                 <FlatButton
                     label={name}
+                    icon={icon}
                     onTouchTap={this.handleTouchTap}
                 />
                 <Popover

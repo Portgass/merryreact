@@ -5,7 +5,7 @@ export default [{
 `Welcome to the first room. This is testing test, let's see, how much can I fit
 in here, Welcome to the first room. This is testing test, let's see, how much
 can I fit in here.`,
-    canTravelTo: ["secondRoom"],
+    canTravelTo: ["l:secondRoom"],
     items: [{
         id: "i:key",
         name: "Mysterious key",
@@ -72,6 +72,13 @@ it. Someithing seems to be locked in its drawer.`
                 targetMessage: "The drawer is unlocked."
             }]
         }]
+    }],
+    characters: [{
+        id: "hat",
+        name: "Sorting hat",
+        onInvestigate: {
+            message: "Famous hat, where it will send me?"
+        }
     }]
 }, {
     id: "l:secondRoom",

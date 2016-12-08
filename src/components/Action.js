@@ -40,12 +40,13 @@ class Action extends Component {
     }
 
     render() {
-        const { props: { name, children } } = this;
+        const { props: { name, icon, children } } = this;
 
         return (
             <span>
                 <FlatButton
                     label={name}
+                    icon={icon}
                     onTouchTap={this.handleTouchTap}
                 />
                 <Popover

@@ -13,6 +13,11 @@ import {
 import './ActionBar.css';
 
 import { Card, CardActions } from 'material-ui/Card';
+import Explore from 'material-ui/svg-icons/action/explore';
+import Visibility from 'material-ui/svg-icons/action/visibility';
+import Extension from 'material-ui/svg-icons/action/extension';
+import AddCircle from 'material-ui/svg-icons/content/add-circle';
+import Message from 'material-ui/svg-icons/communication/message';
 
 import Action from '../components/Action.js';
 import Interaction from '../components/Interaction.js';
@@ -32,13 +37,15 @@ class ActionBar extends Component {
             places,
             investigate,
             inventory,
-            interact
+            interact,
+            characters
         } } = this;
 
         let travelAction = null;
         if(canTravelTo)
             travelAction = (
                 <Action name="Travel"
+                        icon={<Explore />}
                         children={canTravelTo}
                         action={changeLocation} />
             )
@@ -47,17 +54,26 @@ class ActionBar extends Component {
         if(items && items.size)
             pickupAction = (
                 <Action name="Pickup"
+                        icon={<AddCircle />}
                         children={items}
                         action={pickupItem} />
             )
 
         let investigateAction = null;
-        if(places)
+        if(places || characters) {
+            let interactables = List([]);
+            if(places)
+                interactables = interactables.push(places);
+            if(characters)
+                interactables = interactables.push(characters);
+            interactables = interactables.flatten(true);
             investigateAction = (
                 <Action name="Investigate"
-                        children={places}
+                        icon={<Visibility />}
+                        children={interactables}
                         action={investigate} />
             )
+        }
 
         let useAction = null;
         if(inventory && inventory.size) {
@@ -69,9 +85,20 @@ class ActionBar extends Component {
             interactables = interactables.flatten(true);
             useAction = (
                 <Interaction    name="Use"
+                                icon={<Extension />}
                                 children={inventory}
                                 interactables={interactables}
                                 action={interact} />
+            )
+        }
+
+        let talkAction = null;
+        if(characters) {
+            useAction = (
+                <Action name="Talk"
+                        icon={<Message />}
+                        children={characters}
+                        action={interact} />
             )
         }
 
@@ -82,6 +109,7 @@ class ActionBar extends Component {
                     {pickupAction}
                     {investigateAction}
                     {useAction}
+                    {talkAction}
                 </CardActions>
             </Card>
         );
@@ -97,6 +125,7 @@ const mapStateToProps = (state) => {
         }),
         items: state.getIn(['currentLocation', 'items']),
         places: state.getIn(['currentLocation', 'places']),
+        characters: state.getIn(['currentLocation', 'characters']),
         inventory: state.get('inventory')
     };
 };
