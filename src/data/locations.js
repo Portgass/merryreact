@@ -78,7 +78,53 @@ it. Someithing seems to be locked in its drawer.`
         name: "Sorting hat",
         onInvestigate: {
             message: "Famous hat, where it will send me?"
-        }
+        },
+        conversations: [{
+            id: "c:hat:sorting",
+            name: "Be sorted",
+            messages: [
+                "Oh hello little girl.",
+                "Let's see what to do with you.",
+                "Let it be Slytherin"
+            ],
+            events: [{
+                type: "deleteConversation",
+                conversation: {
+                    id: "c:hat:sorting"
+                }
+            }]
+        }, {
+            id: "c:hat:sorted",
+            name: "Ask about other",
+            messages: [
+                "You will learn about them in the future."
+            ],
+            events: [{
+                type: "deleteConversation",
+                conversation: {
+                    id: "c:hat:sorted"
+                }
+            }]
+        }]
+    }, {
+        id: "c:dumbledore",
+        name: "Dumbledore",
+        onInvestigate: {
+            message: "The real wizard, the ebst wizard"
+        },
+        conversations: [{
+            id: "c:dumbledore:hello",
+            name: "Say hi",
+            messages: [
+                "Hello there :)"
+            ],
+            events: [{
+                type: "deleteConversation",
+                conversation: {
+                    id: "c:dumbledore:hello"
+                }
+            }]
+        }]
     }]
 }, {
     id: "l:secondRoom",

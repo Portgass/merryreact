@@ -15,14 +15,18 @@ import Build from 'material-ui/svg-icons/action/build';
 class Interaction extends Component {
     static propTypes = {
         children: PropTypes.instanceOf(List).isRequired,
-        interactables: PropTypes.instanceOf(List).isRequired,
+        interactables: PropTypes.instanceOf(List),
         name: PropTypes.string.isRequired,
         action: PropTypes.func.isRequired
     };
 
+    defaultProps = {
+        talk: false
+    };
+
     state = {
         open: false
-    }
+    };
 
     handleTouchTap = (event) => {
         // This prevents ghost click.
@@ -59,7 +63,8 @@ class Interaction extends Component {
     };
 
     render() {
-        const { props: { name, icon, children, interactables } } = this;
+        const { props: { name, icon, children, talk, disabled } } = this;
+        let { props: { interactables } } = this;
 
         // FIXME error in third room, in interactable.get('id')
         return (
@@ -68,6 +73,7 @@ class Interaction extends Component {
                     label={name}
                     icon={icon}
                     onTouchTap={this.handleTouchTap}
+                    disabled={disabled}
                 />
                 <Popover
                       open={this.state.open}
@@ -78,6 +84,9 @@ class Interaction extends Component {
                 >
                     <Menu>
                         {children.map(item => {
+                            if(talk)
+                                interactables = item.get('conversations');
+
                             return (
                                 <MenuItem
                                     key={item.get('id')}

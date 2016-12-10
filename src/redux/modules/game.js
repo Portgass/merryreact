@@ -11,6 +11,9 @@ const INVESTIGATE = 'game/INVESTIGATE';
 
 const INTERACT = 'game/INTERACT';
 
+const TALK = 'game/TALK';
+const PUSH_CONVERSATION = 'game/PUSH_CONVERSATION';
+
 const ADD_MESSAGE = 'game/ADD_MESSAGE';
 
 
@@ -36,6 +39,14 @@ export function interact(item, interactable) {
     return { type: INTERACT, item, interactable };
 }
 
+export function talk(character, conversation) {
+    return { type: TALK, character, conversation };
+}
+
+export function pushConversation() {
+    return { type: PUSH_CONVERSATION };
+}
+
 export function addMessage(text) {
     return { type: ADD_MESSAGE, text };
 }
@@ -44,6 +55,7 @@ export function addMessage(text) {
 export const defaultState = Map({
     inventory: List([]),
     currentLocation: Map({}),
+    currentConversation: List([]),
     messages: List([]),
     locations: List([])
 });
@@ -152,6 +164,19 @@ export default function(state = defaultState, action) {
             }
 
             return state;
+        case TALK:
+            const conversation = action.conversation;
+
+            state = sendMessage(state, conversation.get('messages').first());
+
+            if(conversation.get('messages').size > 1)
+                state = state.set('currentConversation', conversation.get('messages').shift());
+
+            return state;
+        case PUSH_CONVERSATION:
+            state = sendMessage(state, state.get('currentConversation').first());
+
+            return state.update('currentConversation', c => c.shift());
         case ADD_MESSAGE:
             return sendMessage(state, action.text);
         default:

@@ -57,7 +57,7 @@ class Action extends Component {
     };
 
     render() {
-        const { props: { name, icon, children } } = this;
+        const { props: { name, icon, children, disabled } } = this;
 
         return (
             <span>
@@ -65,6 +65,7 @@ class Action extends Component {
                     label={name}
                     icon={icon}
                     onTouchTap={this.handleTouchTap}
+                    disabled={disabled}
                 />
                 <Popover
                       open={this.state.open}

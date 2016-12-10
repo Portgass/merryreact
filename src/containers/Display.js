@@ -40,7 +40,8 @@ class Display extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        messages: state.get('messages')
+        messages: state.get('messages'),
+        currentConversation: state.get('currentConversation')
     };
 };
 

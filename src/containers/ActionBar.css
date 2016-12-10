@@ -12,3 +12,8 @@
 .ActionBarActions button {
     margin-right: 8px !important;
 }
+
+.Continue {
+    margin-left: auto;
+    margin-right: 0px;
+}

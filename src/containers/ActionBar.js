@@ -8,11 +8,15 @@ import {
     changeLocation,
     pickupItem,
     investigate,
-    interact
+    interact,
+    talk,
+    pushConversation
 } from '../redux/modules/game.js';
 import './ActionBar.css';
 
 import { Card, CardActions } from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
+
 import Explore from 'material-ui/svg-icons/action/explore';
 import Visibility from 'material-ui/svg-icons/action/visibility';
 import Extension from 'material-ui/svg-icons/action/extension';
@@ -38,7 +42,10 @@ class ActionBar extends Component {
             investigate,
             inventory,
             interact,
-            characters
+            characters,
+            talk,
+            currentConversation,
+            pushConversation
         } } = this;
 
         let travelAction = null;
@@ -47,7 +54,8 @@ class ActionBar extends Component {
                 <Action name="Travel"
                         icon={<Explore />}
                         children={canTravelTo}
-                        action={changeLocation} />
+                        action={changeLocation}
+                        disabled={currentConversation.size > 0} />
             )
 
         let pickupAction = null;
@@ -56,7 +64,8 @@ class ActionBar extends Component {
                 <Action name="Pickup"
                         icon={<AddCircle />}
                         children={items}
-                        action={pickupItem} />
+                        action={pickupItem}
+                        disabled={currentConversation.size > 0} />
             )
 
         let investigateAction = null;
@@ -71,7 +80,8 @@ class ActionBar extends Component {
                 <Action name="Investigate"
                         icon={<Visibility />}
                         children={interactables}
-                        action={investigate} />
+                        action={investigate}
+                        disabled={currentConversation.size > 0} />
             )
         }
 
@@ -88,17 +98,30 @@ class ActionBar extends Component {
                                 icon={<Extension />}
                                 children={inventory}
                                 interactables={interactables}
-                                action={interact} />
+                                action={interact}
+                                disabled={currentConversation.size > 0} />
             )
         }
 
         let talkAction = null;
         if(characters) {
             talkAction = (
-                <Action name="Talk"
-                        icon={<Message />}
-                        children={characters}
-                        action={interact} />
+                <Interaction    name="Talk"
+                                icon={<Message />}
+                                children={characters}
+                                talk={true}
+                                action={talk}
+                                disabled={currentConversation.size > 0} />
+            )
+        }
+
+        let continueConversation = null;
+        if(currentConversation.size) {
+            continueConversation = (
+                <RaisedButton   label="Continue"
+                                primary={true}
+                                className="Continue"
+                                onTouchTap={pushConversation} />
             )
         }
 
@@ -110,6 +133,7 @@ class ActionBar extends Component {
                     {investigateAction}
                     {useAction}
                     {talkAction}
+                    {continueConversation}
                 </CardActions>
             </Card>
         );
@@ -126,7 +150,8 @@ const mapStateToProps = (state) => {
         items: state.getIn(['currentLocation', 'items']),
         places: state.getIn(['currentLocation', 'places']),
         characters: state.getIn(['currentLocation', 'characters']),
-        inventory: state.get('inventory')
+        inventory: state.get('inventory'),
+        currentConversation: state.get('currentConversation')
     };
 };
 
@@ -135,7 +160,9 @@ const mapDispatchToProps = (dispatch) => {
         changeLocation,
         pickupItem,
         investigate,
-        interact
+        interact,
+        talk,
+        pushConversation
     }, dispatch);
 };
 
