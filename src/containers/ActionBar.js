@@ -94,7 +94,7 @@ class ActionBar extends Component {
 
         let talkAction = null;
         if(characters) {
-            useAction = (
+            talkAction = (
                 <Action name="Talk"
                         icon={<Message />}
                         children={characters}

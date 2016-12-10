@@ -8,6 +8,10 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
 
+import Room from 'material-ui/svg-icons/action/room';
+import Face from 'material-ui/svg-icons/action/face';
+import Build from 'material-ui/svg-icons/action/build';
+
 class Interaction extends Component {
     static propTypes = {
         children: PropTypes.instanceOf(List).isRequired,
@@ -39,7 +43,20 @@ class Interaction extends Component {
     handleAction = (item, interactable) => {
         this.props.action(item, interactable);
         this.setState({ open: false });
-    }
+    };
+
+    getIcon = type => {
+        switch (type) {
+            case 'p':
+                return <Room />;
+            case 'c':
+                return <Face />;
+            case 'i':
+                return <Build />;
+            default:
+                return null;
+        }
+    };
 
     render() {
         const { props: { name, icon, children, interactables } } = this;
@@ -71,6 +88,7 @@ class Interaction extends Component {
                                             <MenuItem
                                                 key={interactable.get('id')}
                                                 primaryText={interactable.get('name')}
+                                                leftIcon={this.getIcon(interactable.get('id').charAt(0))}
                                                 onTouchTap={() => {
                                                     return this.handleAction(item, interactable)
                                                 }}

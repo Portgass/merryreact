@@ -74,7 +74,7 @@ it. Someithing seems to be locked in its drawer.`
         }]
     }],
     characters: [{
-        id: "hat",
+        id: "c:hat",
         name: "Sorting hat",
         onInvestigate: {
             message: "Famous hat, where it will send me?"

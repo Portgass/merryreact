@@ -7,6 +7,10 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 
+import Room from 'material-ui/svg-icons/action/room';
+import Face from 'material-ui/svg-icons/action/face';
+import Build from 'material-ui/svg-icons/action/build';
+
 class Action extends Component {
     static propTypes = {
         children: PropTypes.instanceOf(List).isRequired,
@@ -37,7 +41,20 @@ class Action extends Component {
     handleAction = (item) => {
         this.props.action(item);
         this.setState({ open: false });
-    }
+    };
+
+    getIcon = type => {
+        switch (type) {
+            case 'p':
+                return <Room />;
+            case 'c':
+                return <Face />;
+            case 'i':
+                return <Build />;
+            default:
+                return null;
+        }
+    };
 
     render() {
         const { props: { name, icon, children } } = this;
@@ -62,6 +79,7 @@ class Action extends Component {
                                 <MenuItem
                                     key={item.get('id')}
                                     primaryText={item.get('name')}
+                                    leftIcon={this.getIcon(item.get('id').charAt(0))}
                                     onTouchTap={() => this.handleAction(item)}
                                 />
                             )
