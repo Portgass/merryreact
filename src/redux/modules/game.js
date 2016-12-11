@@ -80,6 +80,20 @@ function destroyItem(state, item) {
     });
 }
 
+function addConversation(state, character, conversation) {
+    return state.updateIn(['currentLocation', 'characters'], chars => {
+        return chars.map(char => {
+            if(char.get('id') === character) {
+                char = char.update('conversations', cs => {
+                    return cs.push(conversation);
+                });
+            }
+
+            return char;
+        });
+    });
+}
+
 function deleteConversation(state, character, conversation) {
     return state.updateIn(['currentLocation', 'characters'], chars => {
         return chars.map(char => {
@@ -119,6 +133,8 @@ function manageEvents(state, events) {
             state = spawnItem(state, event.get('item'));
         else if(type === 'destroyItem')
             state = destroyItem(state, event.get('item'));
+        else if(type === 'addConversation')
+            state = addConversation(state, event.get('character'), event.get('conversation'));
         else if(type === 'deleteConversation')
             state = deleteConversation(state, event.get('character'), event.get('conversation'));
         else if(type === 'updateMessage')

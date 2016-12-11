@@ -126,6 +126,19 @@ it. Someithing seems to be locked in its drawer.`
                 conversation: {
                     id: "c:dumbledore:hello"
                 }
+            }, {
+                type: "addConversation",
+                character: "c:dumbledore",
+                conversation: {
+                    id: "c:dumbledore:beans",
+                    name: "Give beans",
+                    messages: [
+                        "Oh Berties beans!",
+                        "I once got one that tasted like shite!",
+                        "Umm...",
+                        "My favourite ;)"
+                    ]
+                }
             }]
         }]
     }]
