@@ -80,6 +80,20 @@ function destroyItem(state, item) {
     });
 }
 
+function deleteConversation(state, character, conversation) {
+    return state.updateIn(['currentLocation', 'characters'], chars => {
+        return chars.map(char => {
+            if(char.get('id') === character) {
+                char = char.update('conversations', cs => cs.filter(c => {
+                    return c.get('id') !== conversation.get('id');
+                }));
+            }
+
+            return char;
+        });
+    });
+}
+
 function updateMessage(state, event) {
     let messagePosition;
     if(event.get('targetType') === 'place')
@@ -105,6 +119,8 @@ function manageEvents(state, events) {
             state = spawnItem(state, event.get('item'));
         else if(type === 'destroyItem')
             state = destroyItem(state, event.get('item'));
+        else if(type === 'deleteConversation')
+            state = deleteConversation(state, event.get('character'), event.get('conversation'));
         else if(type === 'updateMessage')
             state = updateMessage(state, event);
     });
@@ -171,6 +187,9 @@ export default function(state = defaultState, action) {
 
             if(conversation.get('messages').size > 1)
                 state = state.set('currentConversation', conversation.get('messages').shift());
+
+            if(conversation.has('events'))
+                state = manageEvents(state, conversation.get('events'));
 
             return state;
         case PUSH_CONVERSATION:

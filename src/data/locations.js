@@ -89,6 +89,7 @@ it. Someithing seems to be locked in its drawer.`
             ],
             events: [{
                 type: "deleteConversation",
+                character: "c:hat",
                 conversation: {
                     id: "c:hat:sorting"
                 }
@@ -101,6 +102,7 @@ it. Someithing seems to be locked in its drawer.`
             ],
             events: [{
                 type: "deleteConversation",
+                character: "c:hat",
                 conversation: {
                     id: "c:hat:sorted"
                 }
@@ -120,6 +122,7 @@ it. Someithing seems to be locked in its drawer.`
             ],
             events: [{
                 type: "deleteConversation",
+                character: "c:dumbledore",
                 conversation: {
                     id: "c:dumbledore:hello"
                 }

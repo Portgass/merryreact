@@ -105,14 +105,21 @@ class ActionBar extends Component {
 
         let talkAction = null;
         if(characters) {
-            talkAction = (
-                <Interaction    name="Talk"
-                                icon={<Message />}
-                                children={characters}
-                                talk={true}
-                                action={talk}
-                                disabled={currentConversation.size > 0} />
-            )
+            let activeCharacters = characters.filter(char => {
+                return char.get('conversations').size;
+            });
+            if(activeCharacters.size) {
+                talkAction = (
+                    <Interaction    name="Talk"
+                                    icon={<Message />}
+                                    children={activeCharacters}
+                                    talk={true}
+                                    action={talk}
+                                    disabled={currentConversation.size > 0} />
+                )
+            } else {
+                talkAction = null;
+            }
         }
 
         let continueConversation = null;
