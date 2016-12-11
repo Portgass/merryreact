@@ -6,6 +6,7 @@ import { Card, CardText } from 'material-ui/Card';
 
 import './Display.css';
 import Message from '../components/Message';
+//import CharacterPhoto from '../components/CharacterPhoto';
 
 class Display extends Component {
     static propTypes = {
@@ -27,7 +28,7 @@ class Display extends Component {
                             return (
                                 <Message    key={index}
                                             message={message}
-                                            position={length - index}/>
+                                            position={length - index} />
                             )
                         }
                         return null
