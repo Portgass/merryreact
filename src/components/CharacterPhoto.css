@@ -1,0 +1,10 @@
+.CharacterPhoto {
+    display: inline-block;
+    width: 200px;
+    height: 300px;
+    background-color: rgba(255, 0, 0, 0.5) !important;
+}
+
+img {
+    object-fit: scale-down;;
+}
