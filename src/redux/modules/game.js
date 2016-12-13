@@ -108,6 +108,15 @@ function deleteConversation(state, character, conversation) {
     });
 }
 
+function printStory(state, story) {
+    state = sendMessage(state, story.first());
+
+    if(story.size > 1)
+        state = state.set('currentConversation', story.shift());
+
+    return state;
+}
+
 function updateMessage(state, event) {
     let messagePosition;
     if(event.get('targetType') === 'place')
@@ -121,6 +130,12 @@ function updateMessage(state, event) {
             return i;
         })
     })
+}
+
+function addLocation(state, location) {
+    return state.updateIn(['currentLocation', 'canTravelTo'], l => {
+        return l.push(location);
+    });
 }
 
 function manageEvents(state, events) {
@@ -137,8 +152,12 @@ function manageEvents(state, events) {
             state = addConversation(state, event.get('character'), event.get('conversation'));
         else if(type === 'deleteConversation')
             state = deleteConversation(state, event.get('character'), event.get('conversation'));
+        else if(type === 'printStory')
+            state = printStory(state, event.get('story'));
         else if(type === 'updateMessage')
             state = updateMessage(state, event);
+        else if(type === 'addLocation')
+            state = addLocation(state, event.get('location'));
     });
 
     return state;
@@ -162,7 +181,11 @@ export default function(state = defaultState, action) {
                         return l;
                 });
             });
-            state = sendMessage(state, location.get('onEnter'));
+            state = manageEvents(state, location.getIn(['onEnter', 'events']))
+
+            if(location.get('onEnter').has('message'))
+                state = sendMessage(state, location.getIn(['onEnter', 'message']));
+
             return state.set('currentLocation', location);
         case PICKUP_ITEM:
             state = state.updateIn(['currentLocation', 'items'], items => {

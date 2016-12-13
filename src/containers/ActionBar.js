@@ -148,12 +148,16 @@ class ActionBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {
-        canTravelTo: state.getIn(['currentLocation', 'canTravelTo']).map(location => {
+    let canTravelTo;
+    if(state.get('currentLocation').has('canTravelTo')) {
+        canTravelTo = state.getIn(['currentLocation', 'canTravelTo']).map(location => {
             return state.get('locations').find(l => {
                 return l.get('id') === location;
             });
-        }),
+        });
+    }
+    return {
+        canTravelTo: canTravelTo,
         items: state.getIn(['currentLocation', 'items']),
         places: state.getIn(['currentLocation', 'places']),
         characters: state.getIn(['currentLocation', 'characters']),
