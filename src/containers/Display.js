@@ -24,7 +24,7 @@ class Display extends Component {
                 <CardText className="CardText">
                     {this.props.messages.map( (message, index) => {
                         let length = this.props.messages.size;
-                        if(index > length - 4){
+                        if(index > length - 6){
                             return (
                                 <Message    key={index}
                                             message={message}

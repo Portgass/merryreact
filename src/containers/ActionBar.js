@@ -49,7 +49,7 @@ class ActionBar extends Component {
         } } = this;
 
         let travelAction = null;
-        if(canTravelTo)
+        if(canTravelTo && canTravelTo.size)
             travelAction = (
                 <Action name="Travel"
                         icon={<Explore />}

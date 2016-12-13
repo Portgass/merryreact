@@ -16,9 +16,7 @@ visited by an actual wizard that told you the truth.`,
 to learn magic.`,
 `And now you are here on your way to the magic school.`,
 `
-***
-
-`,
+***`,
 `You are sitting in a compartment car. There are two other girls.`
         ]}]
     },

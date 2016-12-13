@@ -9,17 +9,23 @@ class Message extends Component {
         position: PropTypes.number.isRequired
     };
 
-    getOpacity = (position) => {
-        if(position === 2)
-            return 'light-fade';
+    getStyle = (position) => {
+        if(position === 1)
+            return 'first';
+        else if(position === 2)
+            return 'fade-1';
         else if(position === 3)
-            return 'heavy-fade';
+            return 'fade-2';
+        else if(position === 4)
+            return 'fade-3';
+        else if(position === 5)
+            return 'fade-4';
     }
 
     render() {
         const { props: { message, position } } = this
         return (
-            <div className={this.getOpacity(position)}>
+            <div className={this.getStyle(position)}>
                 <Typist avgTypingDelay={10}
                         stdTypingDelay={0}
                         cursor={{   hideWhenDone: true,

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, compose } from 'redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { green600 } from 'material-ui/styles/colors';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import reducer from './redux/reducer';
 import App from './App';
@@ -27,9 +29,15 @@ let store = createStore(reducer, enhancer);
 store.dispatch(initLocations(fromJS(locations)));
 store.dispatch(changeLocation(fromJS(locations[0])));
 
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: green600,
+    }
+});
+
 ReactDOM.render(
     <Provider store={store}>
-        <MuiThemeProvider>
+        <MuiThemeProvider muiTheme={muiTheme}>
             <App />
         </MuiThemeProvider>
     </Provider>,
