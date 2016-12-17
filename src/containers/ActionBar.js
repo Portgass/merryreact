@@ -92,8 +92,8 @@ class ActionBar extends Component {
         let useAction = null;
         if(inventory && inventory.size) {
             let interactables = List([]);
-            if(items)
-                interactables = interactables.push(items);
+            if(inventory)
+                interactables = interactables.push(inventory);
             if(places)
                 interactables = interactables.push(places);
             interactables = interactables.flatten(true);

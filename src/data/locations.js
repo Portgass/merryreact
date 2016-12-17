@@ -384,8 +384,10 @@ taht one. All the required things are in the kitchen, so you can start.`
                     name: "Muffin recipe",
                     from: "p:counter",
                     onPickup:
-`This is the recipe, that you need. It seems, like you need a flour, eggs and
-chocolate.`
+`Making muffins 101:
+Find a hippogriff and steal his eggs (don't die, while doing that).
+Get some magic flour and sugar from your regular magic convinienc store.
+Take all ingrediences, mash them together and use them on this recipe.`
                 }
             }]
         }
