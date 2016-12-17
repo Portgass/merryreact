@@ -48,6 +48,10 @@ class ActionBar extends Component {
             pushConversation
         } } = this;
 
+        let showingStory = false;
+        if(currentConversation && currentConversation.size > 0)
+            showingStory = true;
+
         let travelAction = null;
         if(canTravelTo && canTravelTo.size)
             travelAction = (
@@ -55,7 +59,7 @@ class ActionBar extends Component {
                         icon={<Explore />}
                         children={canTravelTo}
                         action={changeLocation}
-                        disabled={currentConversation.size > 0} />
+                        disabled={showingStory} />
             )
 
         let pickupAction = null;
@@ -65,7 +69,7 @@ class ActionBar extends Component {
                         icon={<AddCircle />}
                         children={items}
                         action={pickupItem}
-                        disabled={currentConversation.size > 0} />
+                        disabled={showingStory} />
             )
 
         let investigateAction = null;
@@ -81,7 +85,7 @@ class ActionBar extends Component {
                         icon={<Visibility />}
                         children={interactables}
                         action={investigate}
-                        disabled={currentConversation.size > 0} />
+                        disabled={showingStory} />
             )
         }
 
@@ -99,7 +103,7 @@ class ActionBar extends Component {
                                 children={inventory}
                                 interactables={interactables}
                                 action={interact}
-                                disabled={currentConversation.size > 0} />
+                                disabled={showingStory} />
             )
         }
 
@@ -115,7 +119,7 @@ class ActionBar extends Component {
                                     children={activeCharacters}
                                     talk={true}
                                     action={talk}
-                                    disabled={currentConversation.size > 0} />
+                                    disabled={showingStory} />
                 )
             } else {
                 talkAction = null;

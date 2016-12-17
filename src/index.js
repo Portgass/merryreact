@@ -27,7 +27,7 @@ const enhancer = compose(
 let store = createStore(reducer, enhancer);
 
 store.dispatch(initLocations(fromJS(locations)));
-store.dispatch(changeLocation(fromJS(locations[0])));
+store.dispatch(changeLocation(fromJS(locations[2])));
 
 const muiTheme = getMuiTheme({
     palette: {

@@ -68,7 +68,23 @@ function sendMessage(state, message) {
     });
 }
 
-function spawnItem(state, item) {
+function spawnItem(state, event) {
+    const item = event.get('item');
+
+    if(!state.get('currentLocation').has('items'))
+        state = state.setIn(['currentLocation', 'items'], List([]));
+
+    state = state.updateIn(['currentLocation', 'places'], places => {
+        return places.map(place => {
+            if(place.get('id') === event.get('from'))
+                place = place.updateIn(['onInvestigate', 'events'], es => {
+                    return es.filter(e => e.get('id') !== event.get('id'));
+                });
+
+            return place;
+        })
+    });
+
     return state.updateIn(['currentLocation', 'items'], items => {
         return items.push(item);
     });
@@ -139,26 +155,28 @@ function addLocation(state, location) {
 }
 
 function manageEvents(state, events) {
-    events.forEach(event => {
-        const type = event.get('type');
-        if(event.has('message'))
-            state = sendMessage(state, event.get('message'));
+    if(events && events.size) {
+        events.forEach(event => {
+            const type = event.get('type');
+            if(event.has('message'))
+                state = sendMessage(state, event.get('message'));
 
-        if(type === 'spawnItem')
-            state = spawnItem(state, event.get('item'));
-        else if(type === 'destroyItem')
-            state = destroyItem(state, event.get('item'));
-        else if(type === 'addConversation')
-            state = addConversation(state, event.get('character'), event.get('conversation'));
-        else if(type === 'deleteConversation')
-            state = deleteConversation(state, event.get('character'), event.get('conversation'));
-        else if(type === 'printStory')
-            state = printStory(state, event.get('story'));
-        else if(type === 'updateMessage')
-            state = updateMessage(state, event);
-        else if(type === 'addLocation')
-            state = addLocation(state, event.get('location'));
-    });
+            if(type === 'spawnItem')
+                state = spawnItem(state, event);
+            else if(type === 'destroyItem')
+                state = destroyItem(state, event.get('item'));
+            else if(type === 'addConversation')
+                state = addConversation(state, event.get('character'), event.get('conversation'));
+            else if(type === 'deleteConversation')
+                state = deleteConversation(state, event.get('character'), event.get('conversation'));
+            else if(type === 'printStory')
+                state = printStory(state, event.get('story'));
+            else if(type === 'updateMessage')
+                state = updateMessage(state, event);
+            else if(type === 'addLocation')
+                state = addLocation(state, event.get('location'));
+        });
+    }
 
     return state;
 }
