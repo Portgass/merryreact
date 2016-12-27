@@ -67,7 +67,8 @@ first year at Hogwarts too.`
                             id: "c:tracey:intro:ask_sister",
                             name: "Who is that girl looking out of window?",
                             messages: [
-                                "Tracey: Oh that is my sister Gemma."
+                                "Tracey: Oh that is my sister Gemma.",
+                                "Tracey: I think, that she is thinking about the boy, she likes again."
                             ],
                             events: [{
                                 type: "deleteConversation",
@@ -244,7 +245,163 @@ is agains from all breeding with muggles.`
 `You enter Slytherin Common room. It's filled with gothic furniture. There are
 few people around.`
     },
-    characters: []
+    places: [{
+        id: "p:mirror",
+        name: "Mirror stand",
+        onInvestigate: {
+            message:
+`The antique mirror conatins weird magic. There is a sign - no touching.
+You try to reach for it. But you quickly get interrupted by the headgirl.
+Headgirl: Hey! No touching!.`,
+            events: []
+        },
+        onInteraction: [{
+            item: "i:fake_mirror",
+            message:
+`You wait for your moment, when the headgirl is not paying attention. Quckly
+take the mirror and replace it with Pansy's one.`,
+            events: [{
+                type: "spawnItem",
+                item: {
+                    id: "i:mirror",
+                    name: "Mysterious mirror",
+                    onPickup:
+`You take the mirror and quickly hide it in your pocket.
+You go to some more secluded place and look into it. Some image starts showing
+instead of your reflection. You focus hard on your luggage and it shows you
+the Grand staircase. You wait patiently and you rise to the fourth floor,
+right next to the stairs, there is your luggage.
+The image cuts off right when you see that.`
+                }
+            }, {
+                type: "destroyItem",
+                item: {
+                    id: "i:fake_mirror"
+                }
+            }]
+        }]
+    }],
+    characters: [{
+        id: "c:headgirl:common_room",
+        name: "Headgirl",
+        onInvestigate: {
+            message:
+`The Headgirl is sitting on a couch in the middle of the Common room. She is
+reading her book. But you notice that she is scanning the Common room for any
+mishaps regularly.`
+        },
+        conversations: []
+    }, {
+        id: "c:niles:common_room",
+        name: "Niles",
+        onInvestigate: {
+            message:
+`The boy seems quite nervous and is walking around the girls bedrooms.`
+        },
+        onInteraction: [{
+            item: "i:handkerchief",
+            message:
+`Right when you take out the handkerchief Niles grabs it from you and starts to
+sniff it.
+After a moment, he realises that you are still there.
+Niles: Oh right, I will tell you how the things are.
+Niles: He likes. Sometimes he even talks about her, I can give you a note, with
+the things he always talks about.`,
+            events: [{
+                type: "spawnItem",
+                item: {
+                    id: "i:note",
+                    name: "Note",
+                    onPickup: "Gemma should be pleased, if I give this to her."
+                }
+            }, {
+                type: "destroyItem",
+                item: {
+                    id: "i:handkerchief"
+                }
+            }, {
+                type: "deleteConversation",
+                character: "c:niles:common_room",
+                conversation: {
+                    id: "c:niles:common_room:weird"
+                }
+            }, {
+                type: "deleteConversation",
+                character: "c:niles:common_room",
+                conversation: {
+                    id: "c:niles:common_room:gemma"
+                }
+            }]
+        }],
+        conversations: [{
+            id: "c:niles:common_room:greeting",
+            name: "Hey, how are you?",
+            messages: [
+                "You startle Niles a bit.",
+                "Niles: Hey, I am g..good.",
+                "Niles: I am just looking around here."
+            ],
+            events: [{
+                type: "addConversation",
+                character: "c:niles:common_room",
+                conversation: {
+                    id: "c:niles:common_room:lucinda",
+                    name: "Sure...",
+                    messages: [
+`Niles awkwardly smiles`,
+`Niles: Um, do you by any chance know Lucinda?`,
+`Not really.`,
+`Niles: Oh, that's a shame. She's the most perfect girl I know.`,
+`Niles: She's so pretty and smells nice too!`
+                    ],
+                    events: [{
+                        type: "addConversation",
+                        character: "c:niles:common_room",
+                        conversation: {
+                            id: "c:niles:common_room:gemma",
+                            name: "Do you know a girl called Gemma?",
+                            messages: [
+`Niles thinks for a bit
+Niles: Oh yeah, she's prefect.`,
+`I kinda need to find out if the boy, that she is always with likes her.`,
+`Niles: I can easily tell you, but I want something for it.
+Niles: Lucinda always carries around this handkerchief and I want it.
+It must smell so nice.`
+                            ],
+                            events: []
+                        }
+                    }, {
+                        type: "addConversation",
+                        character: "c:niles:common_room",
+                        conversation: {
+                            id: "c:niles:common_room:weird",
+                            name: "Tell me about this Lucinda",
+                            messages: [
+`Niles: As I already said, she's the most perfect girl I could wish for.
+Niles: Smart, beautiful, but the most important part - the smell!
+Niles: Whenever I smell her, I get this tingling feeling`,
+`You slowly start to back away as he starts to go into too much details about
+Lucinda's smell.`
+                            ],
+                            events: []
+                        }
+                    }, {
+                        type: "deleteConversation",
+                        character: "c:niles:common_room",
+                        conversation: {
+                            id: "c:niles:common_room:lucinda"
+                        }
+                    }]
+                }
+            }, {
+                type: "deleteConversation",
+                character: "c:niles:common_room",
+                conversation: {
+                    id: "c:niles:common_room:greeting"
+                }
+            }]
+        }]
+    }]
 }, {
     id: "l:bedroom:act1",
     name: "Girls bedroom",
@@ -252,7 +409,116 @@ few people around.`
     onEnter: {
         message: "You come up into the bedrooms. People are unpacking their luggages."
     },
-    characters: []
+    places: [{
+        id: "p:bed",
+        name: "Bed",
+        onInvestigate: {
+            message:
+`This is your bed. It's nicely made up. Your luggage is missing tho. You will
+have to find that, so you can start unpackinf all your things.`,
+            events: []
+        },
+        onInteraction: [{
+            item: "i:luggage",
+            message:
+`Gemma helps you bring your luggage here. Now you can finally start getting
+ready for your first year at Hogwarts.`,
+            events: [{
+                type: "printStory",
+                story: [
+`You finish your unpacking bit later that anybody else. But you still are on
+time. You scomfortably lay in the bed and think about all of your adventures,
+that are waiting for you.`,
+`
+***`,
+`You get woken up early in the morning by Tracey. She is very excited too.
+It's gonna be your first day of learning magic.`,
+`This is your first step into the Wizarding World.`
+            ]}]
+        }]
+    }],
+    characters: [{
+        id: "c:tracey:bedroom",
+        name: "Tracey Farley",
+        onInvestigate: {
+            message: "Tracey is sitting on the bed next to yours unpacking her stuff."
+        },
+        conversations: [{
+            id: "c:tracey:bedroom:greeting",
+            name: "How is the unpacking going?",
+            messages: [
+                "Tracey: I am almost done. Have you found your luggage yet?",
+                "No, I still don't know where it is."
+            ],
+            events: []
+        }, {
+            id: "c:tracey:bedroom:boy",
+            name: "Do you know a boy called Niles?",
+            messages: [
+                "Tracey: Yeah, he's always going on about this girl. I don't remember her name.",
+                "The girls name is Lucinda. He asked me to get her hankerchief for him.",
+                "It's a bit weird, but I need other favor from him.",
+`Tracey: Oh that shouldn't be a problem. Just wait here I will sneak up to her
+place.`,
+"But wait! You can't really ... do ... that ...",
+"Tracey is back in a minute.",
+"Tracey: Hey here I got it.",
+"Um.. thanks."
+            ],
+            events: [{
+                type: "spawnItem",
+                item: {
+                    id: "i:handkerchief",
+                    name: "Lucinda's hankerchief",
+                    onPickup:
+`You take the hankerchief from Tracey. You are bit conflicted about it.`
+                }
+            }]
+        }]
+    }, {
+        id: "c:pansy:bedroom",
+        name: "Pansy Parkinson",
+        onInvestigate: {
+            message:
+`Pansy is sitting on the window and looking at herself in the mirror. She seems
+very occupied with admiring her beauty.`
+        },
+        onInteraction: [{
+            item: "i:muffin",
+            message:
+`You walk up to Pansy and ask if she wants a muffin. She looks suspition, but
+int he end can't resist the muffin and takes it.
+You wait a moment and then quickly reach for the mirror, she  put on the table.`,
+            events: [{
+                type: "spawnItem",
+                item: {
+                    id: "i:fake_mirror",
+                    name: "Pansy's mirror",
+                    onPickup: "You quickly grab the mirror, before Pansu can see you."
+                }
+            }, {
+                type: "destroyItem",
+                item: {
+                    id: "i:muffin"
+                }
+            }, {
+                type: "deleteConversation",
+                character: "c:pansy:bedroom",
+                conversation: {
+                    id: "c:pansy:bedroom:mirror_try"
+                }
+            }]
+        }],
+        conversations: [{
+            id: "c:pansy:bedroom:mirror_try",
+            name: "Could I by any chance borrow your mirror?",
+            messages: [
+`Pansy just looks at you...
+Pansy: Are you kidding me! Of course not!`
+            ],
+            events: []
+        }]
+    }]
 }, {
     id: "l:hallway:act1",
     name: "Hallway",
@@ -262,7 +528,88 @@ few people around.`
 `You enter hallway, that Slytherin and Gryffindor houses share. Gemma is sitting
 on a bench nearby reading a book.`
     },
-    characters: []
+    characters: [{
+        id: "c:gemma:hallway",
+        name: "Gemma Farley",
+        onInvestigate: {
+            message:
+`Gemma is standing around a nearby bench with her friends, some of them are from
+Gryffindor and one is even from a Hufflepuff.`
+        },
+        onInteraction: [{
+            item: "i:note",
+            message:
+`You approach Gemma and try to get her attention.
+Gemma: Hey, can you wait for a later? Don't worry I will go get you.
+Just just smile and hand her the note.
+Gemma: Oh, what is this?
+You get closer to her and whisper in her ear, what is the note containing.
+She suddenly smiles. Her eyes sparkle.
+Gemma: Oh my gosh! Thank you so much for this. Hey, whenever you need something,
+just tell me.`,
+            events: [{
+                type: "spawnItem",
+                item: {
+                    id: "i:gemma_help",
+                    name: "Favor from Gemma",
+                    onPickup: "Gemmas promised to help you."
+                }
+            }, {
+                type: "destroyItem",
+                item: {
+                    id: "i:note"
+                }
+            }, {
+                type: "deleteConversation",
+                character: "c:gemma:hallway",
+                conversation: {
+                    id: "c:gemma:hallway:greeting"
+                }
+            }, {
+                type: "addConversation",
+                character: "c:gemma:hallway",
+                conversation: {
+                    id: "c:gemma:hallway:greeting_new",
+                    name: "Say hi",
+                    messages: [
+    `You walk up to Gemma`,
+    `Gemma: Hey, if you have anything you need, just tell me.`
+                    ],
+                    events: []
+                }
+            }]
+        }, {
+            item: "i:location",
+            message:
+`Hey Gemma, can you help me a bit? I lost my luggage, but I found it now. The
+thing is, that it's stuck on the stairs and I need help to get it back
+Gemma: Of course! I told you anything. Let's go get it.
+You and Gemma depart for the luggage. She uses her knowledge of spells and uses
+levitation to easily get it.`,
+            events: [{
+                type: "spawnItem",
+                item: {
+                    id: "i:lugagge",
+                    name: "Your lost luggage",
+                    onPickup: "Your lost luggage, that Gemma is helping get back:"                }
+            }, {
+                type: "destroyItem",
+                item: {
+                    id: "i:location"
+                }
+            }]
+        }],
+        conversations: [{
+            id: "c:gemma:hallway:greeting",
+            name: "Try to say hi to Gemma",
+            messages: [
+`You walked to the Gemma's group, she notices you after a moment`,
+`Gemma: Hi. Sorry, I am a little busy now, you can go find me later.`,
+`She quickly goes back again to talking with the group.`
+            ],
+            events: []
+        }]
+    }]
 }, {
     id: "l:staircase:act1",
     name: "Grand staircase",
@@ -270,7 +617,46 @@ on a bench nearby reading a book.`
     onEnter: {
         message: "The famous Grand staircase. Be careful about where it will take you."
     },
-    characters: []
+    places: [{
+        id: "p:stairs",
+        name: "Stairs",
+        onInvestigate: {
+            message:
+`You have to be careful about these stairs, otherwise, they will take you to
+very strange places.`,
+            events: []
+        },
+        onInteraction: [{
+            item: "i:mirror",
+            message:
+`You let the stairs take you to the place, you saw in the mirror. And when you
+arrive there, you actually see your lost bag. You are very excited. The problem
+is that the luggage is too heavy and you can't take it by yourself.`,
+            events: [{
+                type: "spawnItem",
+                item: {
+                    id: "i:location",
+                    name: "Luggage location",
+                    onPickup: "You write the floor on which the luggage is to your notepad."
+                }
+            }, {
+                type: "destroyItem",
+                item: {
+                    id: "i:mirror"
+                }
+            }]
+        }]
+    }],
+    characters: [{
+        id: "c:painting:staircase",
+        name: "Giffard Abbott's painting",
+        onInvestigate: {
+            message:
+`Painting of a previous Hogwarts headmaster from early ages. He has a dog, that
+is sitting nearby him.`
+        },
+        conversations: []
+    }]
 }, {
     id: "l:entrance_hall:act1",
     name: "Entarnce hall",
@@ -280,7 +666,26 @@ on a bench nearby reading a book.`
 `This is the main entrance to Hogwarts, where you entered. Professor Dumbledore
 is walking around at the bottom of the stairs.`
     },
-    characters: []
+    characters: [{
+        id: "c:dumbledore:entrance_hall",
+        name: "Proffesor Dumbledore",
+        onInvestigate: {
+            message:
+`Proffesor Dumbledore is inspecting all the commotion of the first schoold day.
+He is satisfied how everything is working out. His back was turned to you, but
+as you started to stare at him, he looked back at you and gave you a smile.`
+        },
+        conversations: []
+    }, {
+        id: "c:malfoy:entrance_hall",
+        name: "Draco Malfoy",
+        onInvestigate: {
+            message:
+`The blonde boy is standing in the middle of the hall and his expressions makes
+it look, that it's all his.`
+        },
+        conversations: []
+    }]
 }, {
     id: "l:kitchen:act1",
     name: "Kitchen",
@@ -423,7 +828,76 @@ Except everything seems to be some sort of a wizard brand.`,
                     id: "i:flour",
                     name: "Wizarding Wheat Self-Charmed Flour",
                     onPickup:
-`Hopefully this wheat will work.`
+`Hopefully this wheat will work.`,
+                    onInteraction: [{
+                        item: "i:sugar",
+                        message: "You mixed the flour and sugar.",
+                        events: [{
+                            type: "spawnItem",
+                            item: {
+                                id: "i:sugarflour",
+                                name: "Flour with sugar",
+                                onPickup: "You take the now slightly sweet flour.",
+                                onInteraction: [{
+                                    item: "i:eggs",
+                                    message: "You throw the eggs inside the flour mix.",
+                                    events: [{
+                                        type: "spawnItem",
+                                        item: {
+                                            id: "i:dough",
+                                            name: "Dough",
+                                            onPickup: "The mixed ingredients make up dough now.",
+                                            onInteraction: [{
+                                                item: "i:recipe_muffin",
+                                                message:
+`You cover the dough with recipe and the dough begins to reform and warm up.
+After a while it splits into smaller parts and jumps into prepared bowls.
+Suddenty all parts make a little puff and muffins emerge.`,
+                                                events: [{
+                                                    type: "spawnItem",
+                                                    item: {
+                                                        id: "i:muffin",
+                                                        name: "Muffin",
+                                                        onPickup: "You steal one muffin and put it into your pocket quickly."
+                                                    }
+                                                }, {
+                                                    type: "destroyItem",
+                                                    item: {
+                                                        id: "i:dough"
+                                                    }
+                                                }, {
+                                                    type: "destroyItem",
+                                                    item: {
+                                                        id: "i:recipe"
+                                                    }
+                                                }]
+                                            }]
+                                        }
+                                    }, {
+                                        type: "destroyItem",
+                                        item: {
+                                            id: "i:sugarflour"
+                                        }
+                                    }, {
+                                        type: "destroyItem",
+                                        item: {
+                                            id: "i:eggs"
+                                        }
+                                    }]
+                                }]
+                            }
+                        }, {
+                            type: "destroyItem",
+                            item: {
+                                id: "i:flour"
+                            }
+                        }, {
+                            type: "destroyItem",
+                            item: {
+                                id: "i:sugar"
+                            }
+                        }]
+                    }]
                 }
             }, {
                 type: "spawnItem",
