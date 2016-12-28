@@ -8,8 +8,8 @@ export default [{
             story: [
 `You can hardly hold your excitement as you are sitting in a chugging train.`,
 `This will be your first year at Hogwarts. Magic is so amazing.`,
-`As no one in your family can't use magic, you grateful that you can experience
-the world of spells and magic beasts.`,
+`As no one in your family can't use magic, you are grateful that you can
+experience the world of spells and magic beasts.`,
 `When you got your mail from Hogwarts, you didn't believe it, but you got
 visited by an actual wizard that told you the truth.`,
 `Your parents were very surprised too, but in the end they decided to send you
@@ -119,7 +119,7 @@ but we don't discriminate them. It doesn't seem important.`
 `Gemma: It's rewarding. You have some additional responsibilities, but if you
 want high position in Ministry, you should aim for that badge.`,
 `Gemma: Don't think I will make it easier for you girls, just because we know
-each other. I will specifically keep an eyes on you.`,
+each other. I will specifically keep an eye on you.`,
 `Gemma: Or maybe, when it comes to my sister, I will need both eyes.`
                                             ]
                                         }
@@ -130,7 +130,8 @@ each other. I will specifically keep an eyes on you.`,
                                             id: "c:gemma:intro:there_yet",
                                             name: "When are we gonna arrive?",
                                             messages: [
-`Gemma: Look! The castle is just behind the mountain. You should see it any moment.`,
+`Gemma: Look! The castle is just behind the mountain. You should see it any
+moment.`,
 `As you look out of the window, the Hogwards starts emerging. Such a beautiful
 place.`,
 `It makes you so excited.`
@@ -173,7 +174,7 @@ know. One of them is girl, that looks at you with disgust.`,
 `Blonde girl: What do we have here? The dirty mudblood, that my parents warned
 me about is in the same boat. Don't think you will have it easy here.`,
 `Boy: Pansy, ignore that Mudblood, you don't want to be asociated with her.`,
-`Tracey: Let them be Lou. We will show them, what we stand for.`,
+`Tracey: Let them be Lou. We will show them what we stand for.`,
 `Fighting spirit burns in you, but you let it go. You can't make a scene on the
 first day. Instead you focus on the beautiful castle, that you are approaching`,
 `***`,
@@ -258,7 +259,7 @@ Headgirl: Hey! No touching!.`,
         onInteraction: [{
             item: "i:fake_mirror",
             message:
-`You wait for your moment, when the headgirl is not paying attention. Quckly
+`You wait for your moment, when the headgirl is not paying attention. Quickly
 take the mirror and replace it with Pansy's one.`,
             events: [{
                 type: "spawnItem",
@@ -305,7 +306,7 @@ mishaps regularly.`
 sniff it.
 After a moment, he realises that you are still there.
 Niles: Oh right, I will tell you how the things are.
-Niles: He likes. Sometimes he even talks about her, I can give you a note, with
+Niles: He likes her. Sometimes he even talks about her, I can give you a note, with
 the things he always talks about.`,
             events: [{
                 type: "spawnItem",
@@ -426,15 +427,17 @@ ready for your first year at Hogwarts.`,
             events: [{
                 type: "printStory",
                 story: [
-`You finish your unpacking bit later that anybody else. But you still are on
-time. You scomfortably lay in the bed and think about all of your adventures,
+`You finish your unpacking bit later than everybody else. But you still are on
+time. You comfortably lay in the bed and think about all of your adventures
 that are waiting for you.`,
 `
 ***`,
 `You get woken up early in the morning by Tracey. She is very excited too.
 It's gonna be your first day of learning magic.`,
 `This is your first step into the Wizarding World.`
-            ]}]
+            ]}, {
+                type: "end"
+            }]
         }]
     }],
     characters: [{
@@ -487,14 +490,14 @@ very occupied with admiring her beauty.`
             item: "i:muffin",
             message:
 `You walk up to Pansy and ask if she wants a muffin. She looks suspition, but
-int he end can't resist the muffin and takes it.
-You wait a moment and then quickly reach for the mirror, she  put on the table.`,
+in the end can't resist the muffin and takes it.
+You wait a moment and then quickly reach for the mirror she put on the table.`,
             events: [{
                 type: "spawnItem",
                 item: {
                     id: "i:fake_mirror",
                     name: "Pansy's mirror",
-                    onPickup: "You quickly grab the mirror, before Pansu can see you."
+                    onPickup: "You quickly grab the mirror, before Pansy can see you."
                 }
             }, {
                 type: "destroyItem",
@@ -525,7 +528,7 @@ Pansy: Are you kidding me! Of course not!`
     canTravelTo: ["l:common_room:act1", "l:staircase:act1"],
     onEnter: {
         message:
-`You enter hallway, that Slytherin and Gryffindor houses share. Gemma is sitting
+`You enter hallway that Slytherin and Gryffindor houses share. Gemma is sitting
 on a bench nearby reading a book.`
     },
     characters: [{
@@ -543,7 +546,7 @@ Gryffindor and one is even from a Hufflepuff.`
 Gemma: Hey, can you wait for a later? Don't worry I will go get you.
 Just just smile and hand her the note.
 Gemma: Oh, what is this?
-You get closer to her and whisper in her ear, what is the note containing.
+You get closer to her and whisper in her ear what is the note containing.
 She suddenly smiles. Her eyes sparkle.
 Gemma: Oh my gosh! Thank you so much for this. Hey, whenever you need something,
 just tell me.`,
@@ -579,7 +582,7 @@ just tell me.`,
                 }
             }]
         }, {
-            item: "i:location",
+            item: "i:help",
             message:
 `Hey Gemma, can you help me a bit? I lost my luggage, but I found it now. The
 thing is, that it's stuck on the stairs and I need help to get it back
@@ -589,13 +592,13 @@ levitation to easily get it.`,
             events: [{
                 type: "spawnItem",
                 item: {
-                    id: "i:lugagge",
-                    name: "Your lost luggage",
+                    id: "i:luggage",
+                    name: "Lost luggage",
                     onPickup: "Your lost luggage, that Gemma is helping get back:"                }
             }, {
                 type: "destroyItem",
                 item: {
-                    id: "i:location"
+                    id: "i:help"
                 }
             }]
         }],
@@ -622,7 +625,7 @@ levitation to easily get it.`,
         name: "Stairs",
         onInvestigate: {
             message:
-`You have to be careful about these stairs, otherwise, they will take you to
+`You have to be careful about these stairs, otherwise they will take you to
 very strange places.`,
             events: []
         },
@@ -637,7 +640,29 @@ is that the luggage is too heavy and you can't take it by yourself.`,
                 item: {
                     id: "i:location",
                     name: "Luggage location",
-                    onPickup: "You write the floor on which the luggage is to your notepad."
+                    onPickup: "You write the floor on which the luggage is to your notepad.",
+                    onInteraction: [{
+                        item: "i:gemma_help",
+                        message: "I should ask Gemma if she helps me get my luggage.",
+                        events: [{
+                            type: "spawnItem",
+                            item: {
+                                id: "i:help",
+                                name: "Get Gemma help you",
+                                onPickup: "Now I just need to find Gemma."
+                            }
+                        }, {
+                            type: "destroyItem",
+                            item: {
+                                id: "i:location"
+                            }
+                        }, {
+                            type: "destroyItem",
+                            item: {
+                                id: "i:gemma_help"
+                            }
+                        }]
+                    }]
                 }
             }, {
                 type: "destroyItem",
@@ -652,7 +677,7 @@ is that the luggage is too heavy and you can't take it by yourself.`,
         name: "Giffard Abbott's painting",
         onInvestigate: {
             message:
-`Painting of a previous Hogwarts headmaster from early ages. He has a dog, that
+`Painting of a previous Hogwarts headmaster from early ages. He has a dog that
 is sitting nearby him.`
         },
         conversations: []
@@ -675,7 +700,52 @@ is walking around at the bottom of the stairs.`
 He is satisfied how everything is working out. His back was turned to you, but
 as you started to stare at him, he looked back at you and gave you a smile.`
         },
-        conversations: []
+        conversations: [{
+            id: "c:dumbledore:entrance_hall:greeting",
+            name: "Hello Proffesor",
+            messages: [
+`Dumbledore: Hello there. How do you like Hogwarts.`,
+`It's amazing!`,
+`Dumbledore: I am glad. Do you like your house, you were sorted into?`,
+`Well I do, but some of the other students can be very mean.`,
+`Dumbledore: I see. Sometimes Slytherin students choose the wrong path. But I
+think that Hogwarts will help them better themselves. Also I think if you prove
+yourself to them, they should treat you better. Good luck.`
+            ],
+            events: []
+        }, {
+            id: "c:dumbledore:entrance_hall:lost",
+            name: "I lost my luggage",
+            messages: [
+`Dumbledore: Hm, I think your luggage isn't lost until you stop looking for it.`,
+`Dumbledore: Did you look around the Slytherin Common room?`,
+`A bit I guess, is it there?`,
+`Dumbledore: I don't think so, but amongst other things, there is one peculiar
+mirror you might like.`
+            ],
+            events: [{
+                type: "addConversation",
+                character: "c:dumbledore:entrance_hall",
+                conversation: {
+                    id: "c:dumbledore:entrance_hall:mirror",
+                    name: "Can you tell me more about the mirror?",
+                    messages: [
+`Dumbledore: Some people say, that the mirror helps you when you need to find
+something lost.`,
+`Dumbledore: Some people say that it's just an old mirror.`,
+`What do you say?`,
+`Dumbledore: I say that the mirror is certainly very peculiar thing.`
+                    ],
+                    events: []
+                }
+            }, {
+                type: "deleteConversation",
+                character: "c:dumbledore:entrance_hall",
+                conversation: {
+                    id: "c:dumbledore:entrance_hall:lost"
+                }
+            }]
+        }]
     }, {
         id: "c:malfoy:entrance_hall",
         name: "Draco Malfoy",
@@ -684,7 +754,39 @@ as you started to stare at him, he looked back at you and gave you a smile.`
 `The blonde boy is standing in the middle of the hall and his expressions makes
 it look, that it's all his.`
         },
-        conversations: []
+        conversations: [{
+            id: "c:malfoy:entrance_hall:greeting",
+            name: "Hi",
+            messages: [
+`The boy looks at you surprised.`,
+`Malfoy: Who are you? Have you seen Potter?`,
+`I am ...
+Malfoy: I don't care who. Where is that bastard Potter.`,
+`I don't know...`,
+`Malfoy: Then don't waste my time and go.`
+            ],
+            events: [{
+                type: "addConversation",
+                character: "c:malfoy:entrance_hall",
+                conversation: {
+                    id: "c:malfoy:entrance_hall:potter",
+                    name: "What do you want from that Potter.",
+                    messages: [
+`Malfoy: Why would you care. I just need to find him. If you don't know where
+is, then get out.`,
+`You just shake your hade and leave. He seems to be interested too much in
+Potter. Maybe he likes him.`
+                    ],
+                    events: []
+                }
+            }, {
+                type: "deleteConversation",
+                character: "c:malfoy:entrance_hall",
+                conversation: {
+                    id: "c:malfoy:entrance_hall:greeting"
+                }
+            }]
+        }]
     }]
 }, {
     id: "l:kitchen:act1",
@@ -716,7 +818,7 @@ mustache.`
 `Cook: Yes of course we need help. Look at this mess, it's every year like this,
 go and take the muffins out of the oven.`,
 `He looks at you.`,
-`Cook: Oh you are a student. You can't be here.`,
+`Cook: You are a student. You can't be here. Leave the kitchen.`,
             ],
             events: [{
                 type: "deleteConversation",
@@ -767,7 +869,7 @@ enough for me to work hard.`
 `Helper: You can't. The cook counts them and he will know if you take one.`,
 `Helper: But I will tell you, what you can do. You see, I still need to make one
 more batch. And if you will make it instead of me, you can do one more and take
-taht one. All the required things are in the kitchen, so you can start.`
+that one. All the required things are in the kitchen, so you can start.`
                                     ]
                                 }
                             }]
@@ -791,8 +893,9 @@ taht one. All the required things are in the kitchen, so you can start.`
                     onPickup:
 `Making muffins 101:
 Find a hippogriff and steal his eggs (don't die, while doing that).
-Get some magic flour and sugar from your regular magic convinienc store.
-Take all ingrediences, mash them together and use them on this recipe.`
+Get some magic flour and sugar from your regular magic convinience store.
+Take the sugar, pour it into the flour. Smash the eggs and put them into that.
+The last thing you do is using the recipe on the dough.`
                 }
             }]
         }
@@ -868,7 +971,7 @@ Suddenty all parts make a little puff and muffins emerge.`,
                                                 }, {
                                                     type: "destroyItem",
                                                     item: {
-                                                        id: "i:recipe"
+                                                        id: "i:recipe_muffin"
                                                     }
                                                 }]
                                             }]

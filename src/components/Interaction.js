@@ -81,7 +81,7 @@ class Interaction extends Component {
                       targetOrigin={{horizontal: 'left', vertical: 'top'}}
                       onRequestClose={this.handleRequestClose}
                 >
-                    <Menu>
+                    <Menu desktop={true}>
                         {children.map(item => {
                             if(talk)
                                 interactables = item.get('conversations');

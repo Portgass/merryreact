@@ -1,0 +1,16 @@
+ .Container {
+     margin: 100px auto;
+     width: 600px;
+     text-align: center;
+ }
+
+.Text {
+     color: rgba(255, 255, 255, 1);
+     font-family: 'Tangerine';
+     font-weight: bold;
+     font-size: 108px;
+ }
+
+ .Button {
+     margin: 40px auto;
+ }

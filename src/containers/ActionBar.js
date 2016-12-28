@@ -10,7 +10,8 @@ import {
     investigate,
     interact,
     talk,
-    pushConversation
+    pushConversation,
+    setEnd
 } from '../redux/modules/game.js';
 import './ActionBar.css';
 
@@ -45,7 +46,9 @@ class ActionBar extends Component {
             characters,
             talk,
             currentConversation,
-            pushConversation
+            pushConversation,
+            end,
+            setEnd
         } } = this;
 
         let showingStory = false;
@@ -96,6 +99,8 @@ class ActionBar extends Component {
                 interactables = interactables.push(inventory);
             if(places)
                 interactables = interactables.push(places);
+            if(characters)
+                interactables = interactables.push(characters);
             interactables = interactables.flatten(true);
             useAction = (
                 <Interaction    name="Use"
@@ -136,6 +141,16 @@ class ActionBar extends Component {
             )
         }
 
+        let endAction = null;
+        if(end) {
+            endAction = (
+                <RaisedButton   label="Continue"
+                                primary={true}
+                                className="Continue"
+                                onTouchTap={setEnd} />
+            )
+        }
+
         return (
             <Card className="ActionBar">
                 <CardActions className="ActionBarActions">
@@ -145,6 +160,7 @@ class ActionBar extends Component {
                     {useAction}
                     {talkAction}
                     {continueConversation}
+                    {endAction}
                 </CardActions>
             </Card>
         );
@@ -166,7 +182,8 @@ const mapStateToProps = (state) => {
         places: state.getIn(['currentLocation', 'places']),
         characters: state.getIn(['currentLocation', 'characters']),
         inventory: state.get('inventory'),
-        currentConversation: state.get('currentConversation')
+        currentConversation: state.get('currentConversation'),
+        end: state.get('end')
     };
 };
 
@@ -177,7 +194,8 @@ const mapDispatchToProps = (dispatch) => {
         investigate,
         interact,
         talk,
-        pushConversation
+        pushConversation,
+        setEnd
     }, dispatch);
 };
 

@@ -74,7 +74,7 @@ class Action extends Component {
                       targetOrigin={{horizontal: 'left', vertical: 'top'}}
                       onRequestClose={this.handleRequestClose}
                 >
-                    <Menu>
+                    <Menu desktop={true}>
                         {children.map(item => {
                             return (
                                 <MenuItem

@@ -2,6 +2,9 @@ import { Map, List } from 'immutable';
 
 // Constants
 
+const START = 'game/START';
+const END = 'game/END';
+
 const INIT_LOCATIONS = 'game/INIT_LOCATIONS';
 export const CHANGE_LOCATION = 'game/CHANGE_LOCATION';
 
@@ -18,6 +21,14 @@ const ADD_MESSAGE = 'game/ADD_MESSAGE';
 
 
 // Action Creators
+
+export function setStart() {
+    return { type: START };
+}
+
+export function setEnd() {
+    return { type: END };
+}
 
 export function initLocations(locations) {
     return { type: INIT_LOCATIONS, locations };
@@ -53,6 +64,9 @@ export function addMessage(text) {
 
 // Default state
 export const defaultState = Map({
+    start: false,
+    end: false,
+    finish: false,
     inventory: List([]),
     currentLocation: Map({}),
     currentConversation: List([]),
@@ -74,16 +88,17 @@ function spawnItem(state, event) {
     if(!state.get('currentLocation').has('items'))
         state = state.setIn(['currentLocation', 'items'], List([]));
 
-    state = state.updateIn(['currentLocation', 'places'], places => {
-        return places.map(place => {
-            if(place.get('id') === event.get('from'))
-                place = place.updateIn(['onInvestigate', 'events'], es => {
-                    return es.filter(e => e.get('id') !== event.get('id'));
-                });
+    if(state.get('currentLocation').has('places'))
+        state = state.updateIn(['currentLocation', 'places'], places => {
+            return places.map(place => {
+                if(place.get('id') === event.get('from'))
+                    place = place.updateIn(['onInvestigate', 'events'], es => {
+                        return es.filter(e => e.get('id') !== event.get('id'));
+                    });
 
-            return place;
-        })
-    });
+                return place;
+            })
+        });
 
     return state.updateIn(['currentLocation', 'items'], items => {
         return items.push(item);
@@ -175,6 +190,8 @@ function manageEvents(state, events) {
                 state = updateMessage(state, event);
             else if(type === 'addLocation')
                 state = addLocation(state, event.get('location'));
+            else if(type === 'end')
+                state = state.set('end', true);
         });
     }
 
@@ -185,6 +202,10 @@ function manageEvents(state, events) {
 
 export default function(state = defaultState, action) {
     switch (action.type) {
+        case START:
+            return state.set('start', true);
+        case END:
+            return state.set('finish', true);
         case INIT_LOCATIONS:
             return state.set('locations', action.locations);
         case CHANGE_LOCATION:
