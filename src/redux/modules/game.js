@@ -240,7 +240,7 @@ export default function(state = defaultState, action) {
 
             return sendMessage(state, action.place.getIn(['onInvestigate', 'message']));
         case INTERACT:
-            let message = "That's not on fire!";
+            let message = "This doesn't work...";
             const interactable = action.interactable;
 
             if(interactable.has('onInteraction')) {

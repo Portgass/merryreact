@@ -142,7 +142,7 @@ class ActionBar extends Component {
         }
 
         let endAction = null;
-        if(end) {
+        if(end && currentConversation.size < 1) {
             endAction = (
                 <RaisedButton   label="Continue"
                                 primary={true}

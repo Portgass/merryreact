@@ -11,7 +11,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Display from './containers/Display.js';
 import Inventory from './containers/Inventory.js';
 import ActionBar from './containers/ActionBar.js';
-import DevTools from './components/DevTools.js';
 
 class App extends Component {
     render() {
@@ -30,7 +29,6 @@ class App extends Component {
                             <Display />
                             <Inventory />
                             <ActionBar />
-                            <DevTools />
                         </div>
                     :
                         <div className="Container">
