@@ -252,6 +252,8 @@ export default function(state = defaultState, action) {
                     message = interaction.get('message');
                     state = sendMessage(state, message);
                     state = manageEvents(state, interaction.get('events'));
+                } else {
+                    state = sendMessage(state, message);
                 }
             } else {
                 state = sendMessage(state, message);

@@ -10,8 +10,7 @@ export default [{
 `This will be your first year at Hogwarts. Magic is so amazing.`,
 `As no one in your family can't use magic, you are grateful that you can
 experience the world of spells and magic beasts.`,
-`When you got your mail from Hogwarts, you didn't believe it, but you got
-visited by an actual wizard that told you the truth.`,
+`You didn't even know about magic before you got your mail from Hogwarts.`,
 `Your parents were very surprised too, but in the end they decided to send you
 to learn magic.`,
 `And now you are here on your way to the magic school.`,
@@ -68,7 +67,7 @@ first year at Hogwarts too.`
                             name: "Who is that girl looking out of window?",
                             messages: [
                                 "Tracey: Oh that is my sister Gemma.",
-                                "Tracey: I think, that she is thinking about the boy, she likes again."
+                                "Tracey: I think she is thinking about the boy that she likes again."
                             ],
                             events: [{
                                 type: "deleteConversation",
@@ -102,11 +101,12 @@ first year at Hogwarts too.`
                                             name: "Do you like being in Slytherin?",
                                             messages: [
                                                 "Gemma: Of course I do.",
-`Gemma: It may look, like there aren't good people in there. But actually plenty
+`Gemma: It may look like there aren't good people in there. But actually plenty
 of great wizards were from Slytherin. If you work hard Slytherin will help you
 achieve your dreams.`,
-`Gemma: Although there is some prejudice against mudbloods. Our family is Pure,
-but we don't discriminate them. It doesn't seem important.`
+`Gemma: Although there is some prejudice against mudbloods, so you might be
+careful about that. Especially the Pure families dislike them. But don't worry,
+we are from Pure family too and we can easily be friends with muggles.`
                                             ]
                                         }
                                     }, {
@@ -118,7 +118,7 @@ but we don't discriminate them. It doesn't seem important.`
                                             messages: [
 `Gemma: It's rewarding. You have some additional responsibilities, but if you
 want high position in Ministry, you should aim for that badge.`,
-`Gemma: Don't think I will make it easier for you girls, just because we know
+`Gemma: But don't think I will make it easier for you girls just because we know
 each other. I will specifically keep an eye on you.`,
 `Gemma: Or maybe, when it comes to my sister, I will need both eyes.`
                                             ]
@@ -170,13 +170,13 @@ thoughts and is staring out of window.`
 `The train stopped at a station under Hogwarts' lake. All the first years are
 gathered together and they are waiting for boats to get them to Hogwarts.`,
 `You go into the same boat as Tracey. There are other 6 students that you don't
-know. One of them is girl, that looks at you with disgust.`,
+know. One of them is girl that looks at you with disgust.`,
 `Blonde girl: What do we have here? The dirty mudblood, that my parents warned
 me about is in the same boat. Don't think you will have it easy here.`,
 `Boy: Pansy, ignore that Mudblood, you don't want to be asociated with her.`,
 `Tracey: Let them be Lou. We will show them what we stand for.`,
 `Fighting spirit burns in you, but you let it go. You can't make a scene on the
-first day. Instead you focus on the beautiful castle, that you are approaching`,
+first day. Instead you focus on the beautiful castle that you are approaching`,
 `***`,
 `You climb the main stairs and are standing in front of the huge doors that lead
 to the Great Hall.`,
@@ -211,7 +211,7 @@ that Pansy.`
             messages: [
                 "Tracey: Great! I hope we can be good friends.",
 `Tracey: And now that we are in the same house, I have some tricks I want to
-show you later, that Gemma told me about.`
+show you later. Gemma told me about them.`
             ],
             events: [{
                 type: "addLocation",
@@ -233,7 +233,7 @@ seems to be a popular girl.`
         onInvestigate: {
             message:
 `You heard that her full name is Pansy Parkinson. She comes from a family that
-is agains from all breeding with muggles.`
+is against breeding muggles and wizards`
         },
         conversations: []
     }]
@@ -297,23 +297,23 @@ mishaps regularly.`
         name: "Niles",
         onInvestigate: {
             message:
-`The boy seems quite nervous and is walking around the girls bedrooms.`
+`The boy seems quite nervous and is walking around the girls' bedrooms.`
         },
         onInteraction: [{
             item: "i:handkerchief",
             message:
 `Right when you take out the handkerchief Niles grabs it from you and starts to
 sniff it.
-After a moment, he realises that you are still there.
-Niles: Oh right, I will tell you how the things are.
-Niles: He likes her. Sometimes he even talks about her, I can give you a note, with
-the things he always talks about.`,
+After a moment he realises that you are still there.
+Niles: Oh right, I will tell some things about that boy.
+Niles: He likes her. Sometimes he even talks about her, I can give you a note,
+with the things he likes.`,
             events: [{
                 type: "spawnItem",
                 item: {
                     id: "i:note",
                     name: "Note",
-                    onPickup: "Gemma should be pleased, if I give this to her."
+                    onPickup: "Gemma should be pleased if I give this to her."
                 }
             }, {
                 type: "destroyItem",
@@ -338,7 +338,7 @@ the things he always talks about.`,
             id: "c:niles:common_room:greeting",
             name: "Hey, how are you?",
             messages: [
-                "You startle Niles a bit.",
+                "You startle Niles.",
                 "Niles: Hey, I am g..good.",
                 "Niles: I am just looking around here."
             ],
@@ -362,9 +362,9 @@ the things he always talks about.`,
                             id: "c:niles:common_room:gemma",
                             name: "Do you know a girl called Gemma?",
                             messages: [
-`Niles thinks for a bit
+`Niles looks for her in his memory.
 Niles: Oh yeah, she's prefect.`,
-`I kinda need to find out if the boy, that she is always with likes her.`,
+`I kinda need to find out if the boy that she is always with likes her or not.`,
 `Niles: I can easily tell you, but I want something for it.
 Niles: Lucinda always carries around this handkerchief and I want it.
 It must smell so nice.`
@@ -415,8 +415,8 @@ Lucinda's smell.`
         name: "Bed",
         onInvestigate: {
             message:
-`This is your bed. It's nicely made up. Your luggage is missing tho. You will
-have to find that, so you can start unpackinf all your things.`,
+`This is your bed. It's nicely made up. Your luggage is missing though. You will
+have to find that, so you can start unpacking all your things.`,
             events: []
         },
         onInteraction: [{
@@ -427,7 +427,7 @@ ready for your first year at Hogwarts.`,
             events: [{
                 type: "printStory",
                 story: [
-`You finish your unpacking bit later than everybody else. But you still are on
+`You finish your unpacking later than everybody else. But you still are on
 time. You comfortably lay in the bed and think about all of your adventures
 that are waiting for you.`,
 `
@@ -458,12 +458,13 @@ It's gonna be your first day of learning magic.`,
             id: "c:tracey:bedroom:boy",
             name: "Do you know a boy called Niles?",
             messages: [
-                "Tracey: Yeah, he's always going on about this girl. I don't remember her name.",
-                "The girls name is Lucinda. He asked me to get her hankerchief for him.",
-                "It's a bit weird, but I need other favor from him.",
+"Tracey: Yeah, he's always going on about this girl. I don't remember her name.",
+"The girl's name is Lucinda. He asked me to get her hankerchief for him.",
+"It's a bit weird, but I need other favor from him.",
 `Tracey: Oh that shouldn't be a problem. Just wait here I will sneak up to her
 place.`,
 "But wait! You can't really ... do ... that ...",
+"She doesn't listen ...",
 "Tracey is back in a minute.",
 "Tracey: Hey here I got it.",
 "Um.. thanks."
@@ -489,15 +490,15 @@ very occupied with admiring her beauty.`
         onInteraction: [{
             item: "i:muffin",
             message:
-`You walk up to Pansy and ask if she wants a muffin. She looks suspition, but
-in the end can't resist the muffin and takes it.
+`You walk up to Pansy and ask if she wants a muffin. She looks at you with
+suspition, but in the end can't resist the muffin and takes it.
 You wait a moment and then quickly reach for the mirror she put on the table.`,
             events: [{
                 type: "spawnItem",
                 item: {
                     id: "i:fake_mirror",
                     name: "Pansy's mirror",
-                    onPickup: "You quickly grab the mirror, before Pansy can see you."
+                    onPickup: "You quickly grab the mirror before Pansy can see you."
                 }
             }, {
                 type: "destroyItem",
@@ -528,8 +529,8 @@ Pansy: Are you kidding me! Of course not!`
     canTravelTo: ["l:common_room:act1", "l:staircase:act1"],
     onEnter: {
         message:
-`You enter hallway that Slytherin and Gryffindor houses share. Gemma is sitting
-on a bench nearby reading a book.`
+`You enter hallway that Slytherin and Gryffindor houses share. You can see Gemma
+nearby.`
     },
     characters: [{
         id: "c:gemma:hallway",
@@ -546,16 +547,16 @@ Gryffindor and one is even from a Hufflepuff.`
 Gemma: Hey, can you wait for a later? Don't worry I will go get you.
 Just just smile and hand her the note.
 Gemma: Oh, what is this?
-You get closer to her and whisper in her ear what is the note containing.
+You get closer to her and whisper in her the contents of the note..
 She suddenly smiles. Her eyes sparkle.
-Gemma: Oh my gosh! Thank you so much for this. Hey, whenever you need something,
-just tell me.`,
+Gemma: Oh my gosh! Thank you so much for this. Hey, whenever you need
+something, just tell me.`,
             events: [{
                 type: "spawnItem",
                 item: {
                     id: "i:gemma_help",
                     name: "Favor from Gemma",
-                    onPickup: "Gemmas promised to help you."
+                    onPickup: "Gemma promised to help you."
                 }
             }, {
                 type: "destroyItem",
@@ -632,7 +633,7 @@ very strange places.`,
         onInteraction: [{
             item: "i:mirror",
             message:
-`You let the stairs take you to the place, you saw in the mirror. And when you
+`You let the stairs take you to the place you saw in the mirror. And when you
 arrive there, you actually see your lost bag. You are very excited. The problem
 is that the luggage is too heavy and you can't take it by yourself.`,
             events: [{
@@ -640,7 +641,7 @@ is that the luggage is too heavy and you can't take it by yourself.`,
                 item: {
                     id: "i:location",
                     name: "Luggage location",
-                    onPickup: "You write the floor on which the luggage is to your notepad.",
+                    onPickup: "You write the floor the luggage on into your notepad.",
                     onInteraction: [{
                         item: "i:gemma_help",
                         message: "I should ask Gemma if she helps me get my luggage.",
@@ -688,15 +689,15 @@ is sitting nearby him.`
     canTravelTo: ["l:staircase:act1"],
     onEnter: {
         message:
-`This is the main entrance to Hogwarts, where you entered. Professor Dumbledore
-is walking around at the bottom of the stairs.`
+`This is the main entrance to Hogwarts. You entered through here. Professor
+Dumbledore is walking around at the bottom of the stairs.`
     },
     characters: [{
         id: "c:dumbledore:entrance_hall",
         name: "Proffesor Dumbledore",
         onInvestigate: {
             message:
-`Proffesor Dumbledore is inspecting all the commotion of the first schoold day.
+`Proffesor Dumbledore is inspecting all the commotion of the first school day.
 He is satisfied how everything is working out. His back was turned to you, but
 as you started to stare at him, he looked back at you and gave you a smile.`
         },
@@ -706,7 +707,7 @@ as you started to stare at him, he looked back at you and gave you a smile.`
             messages: [
 `Dumbledore: Hello there. How do you like Hogwarts.`,
 `It's amazing!`,
-`Dumbledore: I am glad. Do you like your house, you were sorted into?`,
+`Dumbledore: I am glad. Do you like your house that you were sorted into?`,
 `Well I do, but some of the other students can be very mean.`,
 `Dumbledore: I see. Sometimes Slytherin students choose the wrong path. But I
 think that Hogwarts will help them better themselves. Also I think if you prove
@@ -752,7 +753,7 @@ something lost.`,
         onInvestigate: {
             message:
 `The blonde boy is standing in the middle of the hall and his expressions makes
-it look, that it's all his.`
+it look like the whole hall belongs to him.`
         },
         conversations: [{
             id: "c:malfoy:entrance_hall:greeting",
@@ -800,7 +801,8 @@ Potter. Maybe he likes him.`
         id: "c:helper:act1",
         name: "Kitchen Helper",
         onInvestigate: {
-            message: "He seems to be lazying around too much, for what needs to be done."
+            message:
+"He seems to be lazying around too much. Tons of work is waitning for him."
         },
         conversations: []
     }, {
@@ -867,7 +869,7 @@ enough for me to work hard.`
                                     name: "Can I get one of the muffins?",
                                     messages: [
 `Helper: You can't. The cook counts them and he will know if you take one.`,
-`Helper: But I will tell you, what you can do. You see, I still need to make one
+`Helper: But I will tell you what you can do. You see, I still need to make one
 more batch. And if you will make it instead of me, you can do one more and take
 that one. All the required things are in the kitchen, so you can start.`
                                     ]
@@ -931,7 +933,7 @@ Except everything seems to be some sort of a wizard brand.`,
                     id: "i:flour",
                     name: "Wizarding Wheat Self-Charmed Flour",
                     onPickup:
-`Hopefully this wheat will work.`,
+`Hopefully this flour will work.`,
                     onInteraction: [{
                         item: "i:sugar",
                         message: "You mixed the flour and sugar.",
